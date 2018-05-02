@@ -13,6 +13,6 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## Authors
 
-**GSA IT - Office of Corporate IT Services**, [Financial Management IT Services (ICSF)](https://github.com/orgs/GSA/teams/corporate-it-services/members)
+**GSA IT**
 
-See also the list of [contributors](https://github.com/GSA/FM-RPA-OSS/graphs/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/GSA/RPA-OSS/graphs/contributors) who participated in this project.
