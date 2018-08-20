@@ -12,6 +12,7 @@
  xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
  xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
  xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:sd1="clr-namespace:System.Drawing;assembly=System.Drawing"
  xmlns:sn="clr-namespace:System.Net;assembly=System"
  xmlns:snm="clr-namespace:System.Net.Mail;assembly=System"
  xmlns:ss="clr-namespace:System.Security;assembly=mscorlib"
@@ -146,7 +147,7 @@
                     <ui:BuildDataTable sap2010:Annotation.AnnotationText="Table of anny issues found while reading the files, searching SAM, etc." DataTable="[errorTable]" DisplayName="Build Error Data Table" sap2010:WorkflowViewState.IdRef="BuildDataTable_2" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Company&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;DUNS&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Person&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;ErrorType&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;  &lt;TableName /&gt;&#xA;&lt;/NewDataSet&gt;" />
                     <FlowStep.Next>
                       <FlowStep x:Name="__ReferenceID23" sap2010:WorkflowViewState.IdRef="FlowStep_71">
-                        <ui:ExcelApplicationScope Password="{x:Null}" sap2010:Annotation.AnnotationText="create teh excel sheet and add the heaaders to it." DisplayName="ceate excel headers" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_8" WorkbookPath="[baseDirectory + &quot;offer-letter-records.xlsx&quot;]">
+                        <ui:ExcelApplicationScope Password="{x:Null}" sap2010:Annotation.AnnotationText="create the excel sheet and add the heaaders to it." DisplayName="create excel headers" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_8" Visible="False" WorkbookPath="[baseDirectory + &quot;offer-letter-records.xlsx&quot;]">
                           <ui:ExcelApplicationScope.Body>
                             <ActivityAction x:TypeArguments="ui:WorkbookApplication">
                               <ActivityAction.Argument>
@@ -314,6 +315,7 @@
                                                                       <Variable x:TypeArguments="x:String" Name="coopPurchase" />
                                                                       <Variable x:TypeArguments="x:String" Name="variable1" />
                                                                       <Variable x:TypeArguments="ui:GenericValue" Name="memorandumFilepath" />
+                                                                      <Variable x:TypeArguments="x:String" Name="pathwayPerson" />
                                                                     </Sequence.Variables>
                                                                     <ui:Comment sap2010:WorkflowViewState.IdRef="Comment_104" Text="// try to read and write the information.&#xA;&#xA;A failure at anypoint should temintate the processing of this file and continue on to the next&#xA;" />
                                                                     <Assign sap2010:WorkflowViewState.IdRef="Assign_795">
@@ -384,7 +386,6 @@
                                                                           <Variable x:TypeArguments="sxl:XDocument" Name="xmlDocumentOutput" />
                                                                           <Variable x:TypeArguments="x:String" Name="tempDate" />
                                                                           <Variable x:TypeArguments="x:String" Name="xmlOutput" />
-                                                                          <Variable x:TypeArguments="x:String" Name="pathwayPerson" />
                                                                           <Variable x:TypeArguments="scg:IEnumerable(sxl:XAttribute)" Name="contractAdminAttrib" />
                                                                           <Variable x:TypeArguments="ui:GenericValue" Name="decimalLocation" />
                                                                           <Variable x:TypeArguments="ui:GenericValue" Name="estCost" />
@@ -642,6 +643,14 @@
                                                                             <Variable x:TypeArguments="x:String" Name="success" />
                                                                             <Variable x:TypeArguments="x:Object" Name="pathResult" />
                                                                           </Sequence.Variables>
+                                                                          <Assign sap2010:WorkflowViewState.IdRef="Assign_1293">
+                                                                            <Assign.To>
+                                                                              <OutArgument x:TypeArguments="scg:List(x:String)">[NAICSCodeList]</OutArgument>
+                                                                            </Assign.To>
+                                                                            <Assign.Value>
+                                                                              <InArgument x:TypeArguments="scg:List(x:String)">[new List(of String)()]</InArgument>
+                                                                            </Assign.Value>
+                                                                          </Assign>
                                                                           <ui:ExecuteXPath XMLString="{x:Null}" DisplayName="Execute XPath" ExistingXML="[xmlDocumentOutput]" sap2010:WorkflowViewState.IdRef="ExecuteXPath_29" Result="[pathResult]" XPathExpression="//NaicsCode" />
                                                                           <ui:ForEach x:TypeArguments="sxl:XElement" DisplayName="For each" sap2010:WorkflowViewState.IdRef="ForEach`1_106" Values="[Ctype(pathResult, IEnumerable(of Object))]">
                                                                             <ui:ForEach.Body>
@@ -902,6 +911,7 @@
                                                                               <Variable x:TypeArguments="x:Object" Name="pathResult" />
                                                                               <Variable x:TypeArguments="ui:GenericValue" Name="tryCount" />
                                                                               <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(of String)()]" Name="SamNAICSCodeList" />
+                                                                              <Variable x:TypeArguments="x:Boolean" Name="naicsCheck" />
                                                                             </Sequence.Variables>
                                                                             <Assign sap2010:WorkflowViewState.IdRef="Assign_634">
                                                                               <Assign.To>
@@ -1029,10 +1039,12 @@
                                                                                     <If Condition="[SamNAICSCodeList.IndexOf(item.ToString) &lt; 0]" sap2010:WorkflowViewState.IdRef="If_303">
                                                                                       <If.Then>
                                                                                         <Sequence sap2010:WorkflowViewState.IdRef="Sequence_583">
-                                                                                          <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{companyName, DUNSNumber, &quot; &quot;,item.ToString+&quot; not found in SAM results&quot;}]" DataTable="[errorTable]" DisplayName="Add NAICS error" sap2010:WorkflowViewState.IdRef="AddDataRow_8" />
-                                                                                          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message box" sap2010:WorkflowViewState.IdRef="MessageBox_57" Text="NO NO NO NO NO!!!!" TopMost="True" />
+                                                                                          <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{companyName, DUNSNumber, &quot; &quot;,&quot; NAICS not found in SAM results&quot;}]" DataTable="[errorTable]" DisplayName="Add NAICS error" sap2010:WorkflowViewState.IdRef="AddDataRow_9" />
                                                                                         </Sequence>
                                                                                       </If.Then>
+                                                                                      <If.Else>
+                                                                                        <ui:Comment sap2010:WorkflowViewState.IdRef="Comment_197" Text="no-op." />
+                                                                                      </If.Else>
                                                                                     </If>
                                                                                   </Sequence>
                                                                                 </ActivityAction>
@@ -1086,7 +1098,7 @@
                                                                                     </Sequence.Variables>
                                                                                     <If Condition="[item.Element(&quot;id&quot;).Value.ToString = &quot;FAR 52.212-3&quot;]" DisplayName="Check for FAR 52.212-3" sap2010:WorkflowViewState.IdRef="If_152">
                                                                                       <If.Then>
-                                                                                        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_370">
+                                                                                        <Sequence DisplayName="Build correct text for Business" sap2010:WorkflowViewState.IdRef="Sequence_370">
                                                                                           <Assign DisplayName="final option of business size" sap2010:WorkflowViewState.IdRef="Assign_641">
                                                                                             <Assign.To>
                                                                                               <OutArgument x:TypeArguments="x:String">[test]</OutArgument>
@@ -1889,6 +1901,135 @@
                                                                                       <InArgument x:TypeArguments="x:String">[xmlDocumentOutput.Element("Offers").Element("PathwayCertDetails").Element("userName").Value.ToString]</InArgument>
                                                                                     </Assign.Value>
                                                                                   </Assign>
+                                                                                  <If Condition="[pathwayPerson.IsNullOrEmpty]" sap2010:WorkflowViewState.IdRef="If_304">
+                                                                                    <If.Then>
+                                                                                      <Sequence DisplayName="Certifcate person not found in XML" sap2010:WorkflowViewState.IdRef="Sequence_596">
+                                                                                        <Sequence.Variables>
+                                                                                          <Variable x:TypeArguments="x:String" Name="certName" />
+                                                                                        </Sequence.Variables>
+                                                                                        <Assign DisplayName="Retrieve the XML file filenames" sap2010:WorkflowViewState.IdRef="Assign_1295">
+                                                                                          <Assign.To>
+                                                                                            <OutArgument x:TypeArguments="s:String[]">[filenames]</OutArgument>
+                                                                                          </Assign.To>
+                                                                                          <Assign.Value>
+                                                                                            <InArgument x:TypeArguments="s:String[]">[Directory.GetFiles(currentDirectory,"*Pathway*.pdf")]</InArgument>
+                                                                                          </Assign.Value>
+                                                                                        </Assign>
+                                                                                        <ui:ForEach x:TypeArguments="x:Object" DisplayName="Loop through all Cert PDF files" sap2010:WorkflowViewState.IdRef="ForEach`1_114" Values="[filenames]">
+                                                                                          <ui:ForEach.Body>
+                                                                                            <ActivityAction x:TypeArguments="x:Object">
+                                                                                              <ActivityAction.Argument>
+                                                                                                <DelegateInArgument x:TypeArguments="x:Object" Name="item" />
+                                                                                              </ActivityAction.Argument>
+                                                                                              <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_595">
+                                                                                                <ui:StartProcess Arguments="{x:Null}" WorkingDirectory="{x:Null}" DisplayName="Start process" FileName="[item.ToString]" sap2010:WorkflowViewState.IdRef="StartProcess_3" />
+                                                                                                <Sequence DisplayName="Screen scraping" sap2010:WorkflowViewState.IdRef="Sequence_594">
+                                                                                                  <Sequence.Variables>
+                                                                                                    <Variable x:TypeArguments="ui:GenericValue" Name="TextDonald" />
+                                                                                                  </Sequence.Variables>
+                                                                                                  <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'AcroRd32.exe PathwayToS...'" sap2010:WorkflowViewState.IdRef="WindowScope_6" InformativeScreenshot="b247e6b1cdd81d9f84f46a26bf057859" Selector="&lt;wnd app='acrord32.exe' cls='AcrobatSDIWindow' title='*Pathway*' /&gt;">
+                                                                                                    <ui:WindowScope.Body>
+                                                                                                      <ActivityAction x:TypeArguments="x:Object">
+                                                                                                        <ActivityAction.Argument>
+                                                                                                          <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                                                                                                        </ActivityAction.Argument>
+                                                                                                        <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_602">
+                                                                                                          <ui:Comment sap2010:WorkflowViewState.IdRef="Comment_198" Text="Make sure the view and zoom are set correctly" />
+                                                                                                          <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Send hotkey" EmptyField="False" sap2010:WorkflowViewState.IdRef="SendHotkey_14" Key=" " KeyModifiers="Alt" SendWindowMessages="False" SpecialKey="False">
+                                                                                                            <ui:SendHotkey.Target>
+                                                                                                              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" WaitForReady="INTERACTIVE" />
+                                                                                                            </ui:SendHotkey.Target>
+                                                                                                          </ui:SendHotkey>
+                                                                                                          <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Send hotkey" EmptyField="False" sap2010:WorkflowViewState.IdRef="SendHotkey_15" Key="x" KeyModifiers="None" SendWindowMessages="False" SpecialKey="False">
+                                                                                                            <ui:SendHotkey.Target>
+                                                                                                              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" WaitForReady="INTERACTIVE" />
+                                                                                                            </ui:SendHotkey.Target>
+                                                                                                          </ui:SendHotkey>
+                                                                                                          <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Send hotkey" EmptyField="False" sap2010:WorkflowViewState.IdRef="SendHotkey_16" Key="2" KeyModifiers="Ctrl" SendWindowMessages="False" SpecialKey="False">
+                                                                                                            <ui:SendHotkey.Target>
+                                                                                                              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" WaitForReady="INTERACTIVE" />
+                                                                                                            </ui:SendHotkey.Target>
+                                                                                                          </ui:SendHotkey>
+                                                                                                          <ui:Comment sap2010:WorkflowViewState.IdRef="Comment_199" Text="There are two layouts for the PDF cert. So try one, if it fails try the other." />
+                                                                                                          <TryCatch DisplayName="Try catch" sap2010:WorkflowViewState.IdRef="TryCatch_93">
+                                                                                                            <TryCatch.Try>
+                                                                                                              <ui:GetOCRText WordsInfo="{x:Null}" DisplayName="Get name from PDF cert" sap2010:WorkflowViewState.IdRef="GetOCRText_7">
+                                                                                                                <ui:GetOCRText.OCREngine>
+                                                                                                                  <ActivityFunc x:TypeArguments="sd1:Image, scg:IEnumerable(scg:KeyValuePair(sd1:Rectangle, x:String))">
+                                                                                                                    <ActivityFunc.Argument>
+                                                                                                                      <DelegateInArgument x:TypeArguments="sd1:Image" Name="Image" />
+                                                                                                                    </ActivityFunc.Argument>
+                                                                                                                    <ui:GoogleOCR FilterRegion="{x:Null}" Text="{x:Null}" AllowedCharacters="" DeniedCharacters="" DisplayName="Google OCR" ExtractWords="False" sap2010:WorkflowViewState.IdRef="GoogleOCR_7" Image="[Image]" Invert="False" Language="eng" Profile="Screen" Scale="2" />
+                                                                                                                  </ActivityFunc>
+                                                                                                                </ui:GetOCRText.OCREngine>
+                                                                                                                <ui:GetOCRText.Target>
+                                                                                                                  <ui:Target Element="{x:Null}" InformativeScreenshot="e13f98b4e380a172a40d58226cf9bd11" Selector="&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl name='Donald J. Ross   HigherEchelon, Inc   ' role='text' /&gt;" TimeoutMS="1000" WaitForReady="INTERACTIVE">
+                                                                                                                    <ui:Target.ClippingRegion>
+                                                                                                                      <ui:Region Rectangle="369, 461, 507, 56" />
+                                                                                                                    </ui:Target.ClippingRegion>
+                                                                                                                  </ui:Target>
+                                                                                                                </ui:GetOCRText.Target>
+                                                                                                                <ui:GetOCRText.Text>
+                                                                                                                  <OutArgument x:TypeArguments="x:String">[certName]</OutArgument>
+                                                                                                                </ui:GetOCRText.Text>
+                                                                                                              </ui:GetOCRText>
+                                                                                                            </TryCatch.Try>
+                                                                                                            <TryCatch.Catches>
+                                                                                                              <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_94">
+                                                                                                                <ActivityAction x:TypeArguments="s:Exception">
+                                                                                                                  <ActivityAction.Argument>
+                                                                                                                    <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                                                                                                                  </ActivityAction.Argument>
+                                                                                                                  <ui:GetOCRText WordsInfo="{x:Null}" DisplayName="Get Name from PDF cert" sap2010:WorkflowViewState.IdRef="GetOCRText_8">
+                                                                                                                    <ui:GetOCRText.OCREngine>
+                                                                                                                      <ActivityFunc x:TypeArguments="sd1:Image, scg:IEnumerable(scg:KeyValuePair(sd1:Rectangle, x:String))">
+                                                                                                                        <ActivityFunc.Argument>
+                                                                                                                          <DelegateInArgument x:TypeArguments="sd1:Image" Name="Image" />
+                                                                                                                        </ActivityFunc.Argument>
+                                                                                                                        <ui:GoogleOCR FilterRegion="{x:Null}" Text="{x:Null}" AllowedCharacters="" DeniedCharacters="" DisplayName="Google OCR" ExtractWords="False" sap2010:WorkflowViewState.IdRef="GoogleOCR_8" Image="[Image]" Invert="False" Language="eng" Profile="Screen" Scale="2" />
+                                                                                                                      </ActivityFunc>
+                                                                                                                    </ui:GetOCRText.OCREngine>
+                                                                                                                    <ui:GetOCRText.Target>
+                                                                                                                      <ui:Target Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="364013e0f372e9faeb041eca33f82f0d" Selector="&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;" WaitForReady="INTERACTIVE">
+                                                                                                                        <ui:Target.ClippingRegion>
+                                                                                                                          <ui:Region Rectangle="369, 461, 507, 56" />
+                                                                                                                        </ui:Target.ClippingRegion>
+                                                                                                                      </ui:Target>
+                                                                                                                    </ui:GetOCRText.Target>
+                                                                                                                    <ui:GetOCRText.Text>
+                                                                                                                      <OutArgument x:TypeArguments="x:String">[certName]</OutArgument>
+                                                                                                                    </ui:GetOCRText.Text>
+                                                                                                                  </ui:GetOCRText>
+                                                                                                                </ActivityAction>
+                                                                                                              </Catch>
+                                                                                                            </TryCatch.Catches>
+                                                                                                          </TryCatch>
+                                                                                                        </Sequence>
+                                                                                                      </ActivityAction>
+                                                                                                    </ui:WindowScope.Body>
+                                                                                                  </ui:WindowScope>
+                                                                                                </Sequence>
+                                                                                                <ui:CloseApplication DisplayName="Close application 'AcroRd32.exe Pathways'" sap2010:WorkflowViewState.IdRef="CloseApplication_2">
+                                                                                                  <ui:CloseApplication.Target>
+                                                                                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="09bd9a0423476e7f3cfc305041cb101f" Selector="&lt;wnd app='acrord32.exe' cls='AcrobatSDIWindow' omit:title='Pathways to Success_HigherEchelon (71274).pdf.pdf - Adobe Acroba*' /&gt;" WaitForReady="INTERACTIVE" />
+                                                                                                  </ui:CloseApplication.Target>
+                                                                                                </ui:CloseApplication>
+                                                                                                <Assign sap2010:WorkflowViewState.IdRef="Assign_1298">
+                                                                                                  <Assign.To>
+                                                                                                    <OutArgument x:TypeArguments="x:String">[pathwayPerson]</OutArgument>
+                                                                                                  </Assign.To>
+                                                                                                  <Assign.Value>
+                                                                                                    <InArgument x:TypeArguments="x:String">[certName]</InArgument>
+                                                                                                  </Assign.Value>
+                                                                                                </Assign>
+                                                                                                <ui:Break sap2010:WorkflowViewState.IdRef="Break_2" />
+                                                                                              </Sequence>
+                                                                                            </ActivityAction>
+                                                                                          </ui:ForEach.Body>
+                                                                                        </ui:ForEach>
+                                                                                      </Sequence>
+                                                                                    </If.Then>
+                                                                                  </If>
                                                                                   <Assign sap2010:WorkflowViewState.IdRef="Assign_678">
                                                                                     <Assign.To>
                                                                                       <OutArgument x:TypeArguments="x:String">[tempPWdate]</OutArgument>
@@ -1897,20 +2038,6 @@
                                                                                       <InArgument x:TypeArguments="x:String">[xmlDocumentOutput.Element("Offers").Element("PathwayCertDetails").Element("completionDate").Value.ToString]</InArgument>
                                                                                     </Assign.Value>
                                                                                   </Assign>
-                                                                                  <ui:CommentOut DisplayName="Comment out" sap2010:WorkflowViewState.IdRef="CommentOut_10">
-                                                                                    <ui:CommentOut.Body>
-                                                                                      <Sequence DisplayName="Ignored Activities" sap2010:WorkflowViewState.IdRef="Sequence_489">
-                                                                                        <Assign sap2010:WorkflowViewState.IdRef="Assign_679">
-                                                                                          <Assign.To>
-                                                                                            <OutArgument x:TypeArguments="x:String">[pathwayCertInfo]</OutArgument>
-                                                                                          </Assign.To>
-                                                                                          <Assign.Value>
-                                                                                            <InArgument x:TypeArguments="x:String">[xmlDocumentOutput.Element("Offers").Element("PathwayCertDetails").Element("completedVia").Value.ToString + " completed on "+tempPWdate.Substring(0,10)]</InArgument>
-                                                                                          </Assign.Value>
-                                                                                        </Assign>
-                                                                                      </Sequence>
-                                                                                    </ui:CommentOut.Body>
-                                                                                  </ui:CommentOut>
                                                                                   <Assign sap2010:WorkflowViewState.IdRef="Assign_791">
                                                                                     <Assign.To>
                                                                                       <OutArgument x:TypeArguments="x:String">[pathwayCertInfo]</OutArgument>
@@ -1928,15 +2055,144 @@
                                                                                       <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
                                                                                     </ActivityAction.Argument>
                                                                                     <Sequence sap2010:WorkflowViewState.IdRef="Sequence_390">
-                                                                                      <Assign sap2010:WorkflowViewState.IdRef="Assign_680">
-                                                                                        <Assign.To>
-                                                                                          <OutArgument x:TypeArguments="x:String">[pathwayCertInfo]</OutArgument>
-                                                                                        </Assign.To>
-                                                                                        <Assign.Value>
-                                                                                          <InArgument x:TypeArguments="x:String">No Pathway Certification Available</InArgument>
-                                                                                        </Assign.Value>
-                                                                                      </Assign>
-                                                                                      <AddToCollection x:TypeArguments="x:String" Collection="[missingInfo]" DisplayName="Add to collection" sap2010:WorkflowViewState.IdRef="AddToCollection`1_79" Item="Pathway Certification" />
+                                                                                      <Sequence sap2010:WorkflowViewState.IdRef="Sequence_611">
+                                                                                        <Sequence.Variables>
+                                                                                          <Variable x:TypeArguments="x:String" Name="certName" />
+                                                                                        </Sequence.Variables>
+                                                                                        <Assign DisplayName="Retrieve the XML file filenames" sap2010:WorkflowViewState.IdRef="Assign_1308">
+                                                                                          <Assign.To>
+                                                                                            <OutArgument x:TypeArguments="s:String[]">[filenames]</OutArgument>
+                                                                                          </Assign.To>
+                                                                                          <Assign.Value>
+                                                                                            <InArgument x:TypeArguments="s:String[]">[Directory.GetFiles(currentDirectory,"*Pathway*.pdf")]</InArgument>
+                                                                                          </Assign.Value>
+                                                                                        </Assign>
+                                                                                        <ui:ForEach x:TypeArguments="x:Object" DisplayName="For each" sap2010:WorkflowViewState.IdRef="ForEach`1_117" Values="[filenames]">
+                                                                                          <ui:ForEach.Body>
+                                                                                            <ActivityAction x:TypeArguments="x:Object">
+                                                                                              <ActivityAction.Argument>
+                                                                                                <DelegateInArgument x:TypeArguments="x:Object" Name="item" />
+                                                                                              </ActivityAction.Argument>
+                                                                                              <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_610">
+                                                                                                <ui:StartProcess Arguments="{x:Null}" WorkingDirectory="{x:Null}" DisplayName="Start process" FileName="[item.ToString]" sap2010:WorkflowViewState.IdRef="StartProcess_4" />
+                                                                                                <Sequence DisplayName="Screen scraping" sap2010:WorkflowViewState.IdRef="Sequence_609">
+                                                                                                  <Sequence.Variables>
+                                                                                                    <Variable x:TypeArguments="ui:GenericValue" Name="TextDonald" />
+                                                                                                  </Sequence.Variables>
+                                                                                                  <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'AcroRd32.exe PathwayToS...'" sap2010:WorkflowViewState.IdRef="WindowScope_7" InformativeScreenshot="b247e6b1cdd81d9f84f46a26bf057859" Selector="&lt;wnd app='acrord32.exe' cls='AcrobatSDIWindow' title='*Pathway*' /&gt;">
+                                                                                                    <ui:WindowScope.Body>
+                                                                                                      <ActivityAction x:TypeArguments="x:Object">
+                                                                                                        <ActivityAction.Argument>
+                                                                                                          <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                                                                                                        </ActivityAction.Argument>
+                                                                                                        <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_608">
+                                                                                                          <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Send hotkey" EmptyField="False" sap2010:WorkflowViewState.IdRef="SendHotkey_17" Key=" " KeyModifiers="Alt" SendWindowMessages="False" SpecialKey="False">
+                                                                                                            <ui:SendHotkey.Target>
+                                                                                                              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" WaitForReady="INTERACTIVE" />
+                                                                                                            </ui:SendHotkey.Target>
+                                                                                                          </ui:SendHotkey>
+                                                                                                          <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Send hotkey" EmptyField="False" sap2010:WorkflowViewState.IdRef="SendHotkey_18" Key="x" KeyModifiers="None" SendWindowMessages="False" SpecialKey="False">
+                                                                                                            <ui:SendHotkey.Target>
+                                                                                                              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" WaitForReady="INTERACTIVE" />
+                                                                                                            </ui:SendHotkey.Target>
+                                                                                                          </ui:SendHotkey>
+                                                                                                          <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Send hotkey" EmptyField="False" sap2010:WorkflowViewState.IdRef="SendHotkey_19" Key="2" KeyModifiers="Ctrl" SendWindowMessages="False" SpecialKey="False">
+                                                                                                            <ui:SendHotkey.Target>
+                                                                                                              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" WaitForReady="INTERACTIVE" />
+                                                                                                            </ui:SendHotkey.Target>
+                                                                                                          </ui:SendHotkey>
+                                                                                                          <TryCatch DisplayName="Try catch" sap2010:WorkflowViewState.IdRef="TryCatch_94">
+                                                                                                            <TryCatch.Try>
+                                                                                                              <ui:GetOCRText WordsInfo="{x:Null}" DisplayName="Get OCR text 'AVL_AVView'" sap2010:WorkflowViewState.IdRef="GetOCRText_9">
+                                                                                                                <ui:GetOCRText.OCREngine>
+                                                                                                                  <ActivityFunc x:TypeArguments="sd1:Image, scg:IEnumerable(scg:KeyValuePair(sd1:Rectangle, x:String))">
+                                                                                                                    <ActivityFunc.Argument>
+                                                                                                                      <DelegateInArgument x:TypeArguments="sd1:Image" Name="Image" />
+                                                                                                                    </ActivityFunc.Argument>
+                                                                                                                    <ui:GoogleOCR FilterRegion="{x:Null}" Text="{x:Null}" AllowedCharacters="" DeniedCharacters="" DisplayName="Google OCR" ExtractWords="False" sap2010:WorkflowViewState.IdRef="GoogleOCR_9" Image="[Image]" Invert="False" Language="eng" Profile="Screen" Scale="2" />
+                                                                                                                  </ActivityFunc>
+                                                                                                                </ui:GetOCRText.OCREngine>
+                                                                                                                <ui:GetOCRText.Target>
+                                                                                                                  <ui:Target Element="{x:Null}" InformativeScreenshot="e13f98b4e380a172a40d58226cf9bd11" Selector="&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl name='Donald J. Ross   HigherEchelon, Inc   ' role='text' /&gt;" TimeoutMS="1000" WaitForReady="INTERACTIVE">
+                                                                                                                    <ui:Target.ClippingRegion>
+                                                                                                                      <ui:Region Rectangle="369, 461, 507, 56" />
+                                                                                                                    </ui:Target.ClippingRegion>
+                                                                                                                  </ui:Target>
+                                                                                                                </ui:GetOCRText.Target>
+                                                                                                                <ui:GetOCRText.Text>
+                                                                                                                  <OutArgument x:TypeArguments="x:String">[certName]</OutArgument>
+                                                                                                                </ui:GetOCRText.Text>
+                                                                                                              </ui:GetOCRText>
+                                                                                                            </TryCatch.Try>
+                                                                                                            <TryCatch.Catches>
+                                                                                                              <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_95">
+                                                                                                                <ActivityAction x:TypeArguments="s:Exception">
+                                                                                                                  <ActivityAction.Argument>
+                                                                                                                    <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                                                                                                                  </ActivityAction.Argument>
+                                                                                                                  <ui:GetOCRText WordsInfo="{x:Null}" DisplayName="Get OCR text 'AVL_AVView'" sap2010:WorkflowViewState.IdRef="GetOCRText_10">
+                                                                                                                    <ui:GetOCRText.OCREngine>
+                                                                                                                      <ActivityFunc x:TypeArguments="sd1:Image, scg:IEnumerable(scg:KeyValuePair(sd1:Rectangle, x:String))">
+                                                                                                                        <ActivityFunc.Argument>
+                                                                                                                          <DelegateInArgument x:TypeArguments="sd1:Image" Name="Image" />
+                                                                                                                        </ActivityFunc.Argument>
+                                                                                                                        <ui:GoogleOCR FilterRegion="{x:Null}" Text="{x:Null}" AllowedCharacters="" DeniedCharacters="" DisplayName="Google OCR" ExtractWords="False" sap2010:WorkflowViewState.IdRef="GoogleOCR_10" Image="[Image]" Invert="False" Language="eng" Profile="Screen" Scale="2" />
+                                                                                                                      </ActivityFunc>
+                                                                                                                    </ui:GetOCRText.OCREngine>
+                                                                                                                    <ui:GetOCRText.Target>
+                                                                                                                      <ui:Target Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="364013e0f372e9faeb041eca33f82f0d" Selector="&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;" WaitForReady="INTERACTIVE">
+                                                                                                                        <ui:Target.ClippingRegion>
+                                                                                                                          <ui:Region Rectangle="369, 461, 507, 56" />
+                                                                                                                        </ui:Target.ClippingRegion>
+                                                                                                                      </ui:Target>
+                                                                                                                    </ui:GetOCRText.Target>
+                                                                                                                    <ui:GetOCRText.Text>
+                                                                                                                      <OutArgument x:TypeArguments="x:String">[certName]</OutArgument>
+                                                                                                                    </ui:GetOCRText.Text>
+                                                                                                                  </ui:GetOCRText>
+                                                                                                                </ActivityAction>
+                                                                                                              </Catch>
+                                                                                                            </TryCatch.Catches>
+                                                                                                          </TryCatch>
+                                                                                                        </Sequence>
+                                                                                                      </ActivityAction>
+                                                                                                    </ui:WindowScope.Body>
+                                                                                                  </ui:WindowScope>
+                                                                                                </Sequence>
+                                                                                                <ui:CloseApplication DisplayName="Close application 'AcroRd32.exe Pathways'" sap2010:WorkflowViewState.IdRef="CloseApplication_3">
+                                                                                                  <ui:CloseApplication.Target>
+                                                                                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="09bd9a0423476e7f3cfc305041cb101f" Selector="&lt;wnd app='acrord32.exe' cls='AcrobatSDIWindow' omit:title='Pathways to Success_HigherEchelon (71274).pdf.pdf - Adobe Acroba*' /&gt;" WaitForReady="INTERACTIVE" />
+                                                                                                  </ui:CloseApplication.Target>
+                                                                                                </ui:CloseApplication>
+                                                                                                <Assign sap2010:WorkflowViewState.IdRef="Assign_1309">
+                                                                                                  <Assign.To>
+                                                                                                    <OutArgument x:TypeArguments="x:String">[pathwayPerson]</OutArgument>
+                                                                                                  </Assign.To>
+                                                                                                  <Assign.Value>
+                                                                                                    <InArgument x:TypeArguments="x:String">[certName]</InArgument>
+                                                                                                  </Assign.Value>
+                                                                                                </Assign>
+                                                                                                <ui:Break sap2010:WorkflowViewState.IdRef="Break_4" />
+                                                                                              </Sequence>
+                                                                                            </ActivityAction>
+                                                                                          </ui:ForEach.Body>
+                                                                                        </ui:ForEach>
+                                                                                        <If Condition="[pathwayPerson.IsNullOrEmpty]" sap2010:WorkflowViewState.IdRef="If_307">
+                                                                                          <If.Then>
+                                                                                            <Sequence sap2010:WorkflowViewState.IdRef="Sequence_612">
+                                                                                              <Assign sap2010:WorkflowViewState.IdRef="Assign_680">
+                                                                                                <Assign.To>
+                                                                                                  <OutArgument x:TypeArguments="x:String">[pathwayCertInfo]</OutArgument>
+                                                                                                </Assign.To>
+                                                                                                <Assign.Value>
+                                                                                                  <InArgument x:TypeArguments="x:String">No Pathway Certification Available</InArgument>
+                                                                                                </Assign.Value>
+                                                                                              </Assign>
+                                                                                              <AddToCollection x:TypeArguments="x:String" Collection="[missingInfo]" DisplayName="Add to collection" sap2010:WorkflowViewState.IdRef="AddToCollection`1_79" Item="Pathway Certification" />
+                                                                                            </Sequence>
+                                                                                          </If.Then>
+                                                                                        </If>
+                                                                                      </Sequence>
                                                                                     </Sequence>
                                                                                   </ActivityAction>
                                                                                 </Catch>
@@ -1980,9 +2236,64 @@
                                                                             </ui:ForEach>
                                                                             <If Condition="[NOT pathwayCheck]" sap2010:WorkflowViewState.IdRef="If_172">
                                                                               <If.Then>
-                                                                                <Sequence sap2010:WorkflowViewState.IdRef="Sequence_428">
-                                                                                  <ui:Comment sap2010:WorkflowViewState.IdRef="Comment_123" Text="// Person with Pathway Cert is not listed as a negoitator." />
-                                                                                  <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{companyName, DUNSNumber, item.ToString,CERTERROR}]" DataTable="[errorTable]" DisplayName="Add Cert Error" sap2010:WorkflowViewState.IdRef="AddDataRow_4" />
+                                                                                <Sequence sap2010:WorkflowViewState.IdRef="Sequence_607">
+                                                                                  <Sequence.Variables>
+                                                                                    <Variable x:TypeArguments="s:String[]" Name="names" />
+                                                                                  </Sequence.Variables>
+                                                                                  <Assign sap2010:WorkflowViewState.IdRef="Assign_1307">
+                                                                                    <Assign.To>
+                                                                                      <OutArgument x:TypeArguments="s:String[]">[names]</OutArgument>
+                                                                                    </Assign.To>
+                                                                                    <Assign.Value>
+                                                                                      <InArgument x:TypeArguments="s:String[]">[pathwayPerson.Split()]</InArgument>
+                                                                                    </Assign.Value>
+                                                                                  </Assign>
+                                                                                  <ui:ForEach x:TypeArguments="x:String" DisplayName="For each" sap2010:WorkflowViewState.IdRef="ForEach`1_116" Values="[negatiatorNameList]">
+                                                                                    <ui:ForEach.Body>
+                                                                                      <ActivityAction x:TypeArguments="x:String">
+                                                                                        <ActivityAction.Argument>
+                                                                                          <DelegateInArgument x:TypeArguments="x:String" Name="item" />
+                                                                                        </ActivityAction.Argument>
+                                                                                        <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_606">
+                                                                                          <Sequence.Variables>
+                                                                                            <Variable x:TypeArguments="s:String[]" Name="nameCheck" />
+                                                                                          </Sequence.Variables>
+                                                                                          <Assign sap2010:WorkflowViewState.IdRef="Assign_1304">
+                                                                                            <Assign.To>
+                                                                                              <OutArgument x:TypeArguments="s:String[]">[nameCheck]</OutArgument>
+                                                                                            </Assign.To>
+                                                                                            <Assign.Value>
+                                                                                              <InArgument x:TypeArguments="s:String[]">[item.Split()]</InArgument>
+                                                                                            </Assign.Value>
+                                                                                          </Assign>
+                                                                                          <If Condition="[(names(0).Equals(nameCheck(0)) AND (names(names.Length -1).Equals(nameCheck(nameCheck.Length -1))))]" DisplayName="Compare first and Last names" sap2010:WorkflowViewState.IdRef="If_306">
+                                                                                            <If.Then>
+                                                                                              <Sequence sap2010:WorkflowViewState.IdRef="Sequence_605">
+                                                                                                <Assign sap2010:WorkflowViewState.IdRef="Assign_1305">
+                                                                                                  <Assign.To>
+                                                                                                    <OutArgument x:TypeArguments="x:Boolean">[pathwayCheck]</OutArgument>
+                                                                                                  </Assign.To>
+                                                                                                  <Assign.Value>
+                                                                                                    <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                                                                                                  </Assign.Value>
+                                                                                                </Assign>
+                                                                                                <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{companyName, DUNSNumber, item.ToString,&quot;The middle initial does not match/exist in Certificate name&quot;}]" DataTable="[errorTable]" DisplayName="Add Cert Error" sap2010:WorkflowViewState.IdRef="AddDataRow_13" />
+                                                                                                <ui:Break sap2010:WorkflowViewState.IdRef="Break_3" />
+                                                                                              </Sequence>
+                                                                                            </If.Then>
+                                                                                          </If>
+                                                                                        </Sequence>
+                                                                                      </ActivityAction>
+                                                                                    </ui:ForEach.Body>
+                                                                                  </ui:ForEach>
+                                                                                  <Assign sap2010:WorkflowViewState.IdRef="Assign_1306">
+                                                                                    <Assign.To>
+                                                                                      <OutArgument x:TypeArguments="s:String[]">[names]</OutArgument>
+                                                                                    </Assign.To>
+                                                                                    <Assign.Value>
+                                                                                      <InArgument x:TypeArguments="s:String[]">[pathwayPerson.Split()]</InArgument>
+                                                                                    </Assign.Value>
+                                                                                  </Assign>
                                                                                 </Sequence>
                                                                               </If.Then>
                                                                             </If>
@@ -2642,8 +2953,7 @@
                                                     </Assign.To>
                                                     <Assign.Value>
                                                       <InArgument x:TypeArguments="x:String" xml:space="preserve">["&lt;p&gt;Hello Supervisor,&lt;br&gt;&lt;br&gt;"+
-totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&gt;&lt;/p&gt;" +
-"&lt;p&gt; There were "+ validPreNeg.Count.ToString +" created that did not contain any issues at this time. &lt;br&gt;&lt;br&gt;&lt;/p&gt;"]</InArgument>
+totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&gt;&lt;/p&gt;"]</InArgument>
                                                     </Assign.Value>
                                                   </Assign>
                                                   <FlowStep.Next>
@@ -2664,6 +2974,15 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
                                                               <Variable x:TypeArguments="x:String" Name="newError" />
                                                               <Variable x:TypeArguments="sd:DataRow" Name="oldRow" />
                                                             </Sequence.Variables>
+                                                            <Assign DisplayName="create email body" sap2010:WorkflowViewState.IdRef="Assign_1296">
+                                                              <Assign.To>
+                                                                <OutArgument x:TypeArguments="x:String">[tempBody]</OutArgument>
+                                                              </Assign.To>
+                                                              <Assign.Value>
+                                                                <InArgument x:TypeArguments="x:String" xml:space="preserve">[tempBody +
+"&lt;p&gt; The following items may need further action.&lt;br&gt;&lt;br&gt;&lt;/p&gt;"]</InArgument>
+                                                              </Assign.Value>
+                                                            </Assign>
                                                             <Assign sap2010:WorkflowViewState.IdRef="Assign_1124">
                                                               <Assign.To>
                                                                 <OutArgument x:TypeArguments="x:Int32">[count]</OutArgument>
@@ -2672,20 +2991,20 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
                                                                 <InArgument x:TypeArguments="x:Int32">1</InArgument>
                                                               </Assign.Value>
                                                             </Assign>
-                                                            <Assign sap2010:WorkflowViewState.IdRef="Assign_1234">
-                                                              <Assign.To>
-                                                                <OutArgument x:TypeArguments="sd:DataRow">[row]</OutArgument>
-                                                              </Assign.To>
-                                                              <Assign.Value>
-                                                                <InArgument x:TypeArguments="sd:DataRow">[errorTable.Rows(count)]</InArgument>
-                                                              </Assign.Value>
-                                                            </Assign>
                                                             <While DisplayName="While more errors" sap2010:WorkflowViewState.IdRef="While_5">
                                                               <While.Variables>
                                                                 <Variable x:TypeArguments="x:String" Name="finalError" />
                                                               </While.Variables>
                                                               <While.Condition>[count &lt; errorTable.Rows.Count]</While.Condition>
                                                               <Sequence DisplayName="Error Builder" sap2010:WorkflowViewState.IdRef="Sequence_556">
+                                                                <Assign sap2010:WorkflowViewState.IdRef="Assign_1310">
+                                                                  <Assign.To>
+                                                                    <OutArgument x:TypeArguments="sd:DataRow">[row]</OutArgument>
+                                                                  </Assign.To>
+                                                                  <Assign.Value>
+                                                                    <InArgument x:TypeArguments="sd:DataRow">[errorTable.Rows(count)]</InArgument>
+                                                                  </Assign.Value>
+                                                                </Assign>
                                                                 <Assign sap2010:WorkflowViewState.IdRef="Assign_1190">
                                                                   <Assign.To>
                                                                     <OutArgument x:TypeArguments="x:String">[tempError]</OutArgument>
@@ -2718,7 +3037,7 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
                                                                     <InArgument x:TypeArguments="x:String">[row("Person").ToString]</InArgument>
                                                                   </Assign.Value>
                                                                 </Assign>
-                                                                <If Condition="[(count + 1) &lt; errorTable.Rows.Count]" sap2010:WorkflowViewState.IdRef="If_285">
+                                                                <If Condition="[(count + 1) &lt; errorTable.Rows.Count]" DisplayName="Check for a DUNS number in the error" sap2010:WorkflowViewState.IdRef="If_285">
                                                                   <If.Then>
                                                                     <Sequence sap2010:WorkflowViewState.IdRef="Sequence_553">
                                                                       <Assign sap2010:WorkflowViewState.IdRef="Assign_1196">
@@ -2752,7 +3071,7 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
                                                                     </Sequence>
                                                                   </If.Else>
                                                                 </If>
-                                                                <If Condition="[String.IsNullOrEmpty(finalError)]" sap2010:WorkflowViewState.IdRef="If_294">
+                                                                <If Condition="[String.IsNullOrEmpty(finalError)]" DisplayName="Wass there already an errror?" sap2010:WorkflowViewState.IdRef="If_294">
                                                                   <If.Then>
                                                                     <Assign sap2010:WorkflowViewState.IdRef="Assign_1237">
                                                                       <Assign.To>
@@ -2938,7 +3257,7 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
     <x:Reference>__ReferenceID23</x:Reference>
     <x:Reference>__ReferenceID24</x:Reference>
     <x:Reference>__ReferenceID25</x:Reference>
-    <sads:DebugSymbol.Symbol>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</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>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</sads:DebugSymbol.Symbol>
   </Flowchart>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -3005,7 +3324,7 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-            <x:Boolean x:Key="IsPinned">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
@@ -3028,7 +3347,7 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-            <x:Boolean x:Key="IsPinned">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
             <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
@@ -3080,15 +3399,15 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
       <sap2010:ViewStateData Id="Comment_103" sap:VirtualizedContainerService.HintSize="314,284" />
       <sap2010:ViewStateData Id="Comment_104" sap:VirtualizedContainerService.HintSize="860,132" />
       <sap2010:ViewStateData Id="Assign_795" sap:VirtualizedContainerService.HintSize="860,60" />
-      <sap2010:ViewStateData Id="Assign_796" sap:VirtualizedContainerService.HintSize="860,60" />
+      <sap2010:ViewStateData Id="Assign_796" sap:VirtualizedContainerService.HintSize="314,60" />
       <sap2010:ViewStateData Id="Assign_1075" sap:VirtualizedContainerService.HintSize="242,60" />
       <sap2010:ViewStateData Id="Assign_1076" sap:VirtualizedContainerService.HintSize="242,60" />
       <sap2010:ViewStateData Id="Assign_1077" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Sequence_515" sap:VirtualizedContainerService.HintSize="860,51">
+      <sap2010:ViewStateData Id="Sequence_515" sap:VirtualizedContainerService.HintSize="314,51">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-            <x:Boolean x:Key="IsPinned">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
@@ -3096,7 +3415,7 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
       <sap2010:ViewStateData Id="Comment_192" sap:VirtualizedContainerService.HintSize="314,55" />
       <sap2010:ViewStateData Id="CreateDirectory_2" sap:VirtualizedContainerService.HintSize="200,22" />
       <sap2010:ViewStateData Id="If_274" sap:VirtualizedContainerService.HintSize="539,208" />
-      <sap2010:ViewStateData Id="Sequence_519" sap:VirtualizedContainerService.HintSize="860,461">
+      <sap2010:ViewStateData Id="Sequence_519" sap:VirtualizedContainerService.HintSize="314,51">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -3157,7 +3476,7 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="TryCatch_72" sap:VirtualizedContainerService.HintSize="816,1113">
+      <sap2010:ViewStateData Id="TryCatch_72" sap:VirtualizedContainerService.HintSize="816,51">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -3233,16 +3552,17 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="Assign_618" sap:VirtualizedContainerService.HintSize="816,60" />
-      <sap2010:ViewStateData Id="ExecuteXPath_29" sap:VirtualizedContainerService.HintSize="352,89" />
-      <sap2010:ViewStateData Id="AddToCollection`1_97" sap:VirtualizedContainerService.HintSize="314,22" />
-      <sap2010:ViewStateData Id="Sequence_573" sap:VirtualizedContainerService.HintSize="336,245">
+      <sap2010:ViewStateData Id="Assign_1293" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="ExecuteXPath_29" sap:VirtualizedContainerService.HintSize="314,89" />
+      <sap2010:ViewStateData Id="AddToCollection`1_97" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Sequence_573" sap:VirtualizedContainerService.HintSize="222,146">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ForEach`1_106" sap:VirtualizedContainerService.HintSize="352,379">
+      <sap2010:ViewStateData Id="ForEach`1_106" sap:VirtualizedContainerService.HintSize="314,280">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -3250,7 +3570,7 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_574" sap:VirtualizedContainerService.HintSize="816,632">
+      <sap2010:ViewStateData Id="Sequence_574" sap:VirtualizedContainerService.HintSize="816,633">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -3297,11 +3617,11 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="Assign_1279" sap:VirtualizedContainerService.HintSize="547,60" />
       <sap2010:ViewStateData Id="Assign_1280" sap:VirtualizedContainerService.HintSize="547,60" />
-      <sap2010:ViewStateData Id="Sequence_571" sap:VirtualizedContainerService.HintSize="569,1219">
+      <sap2010:ViewStateData Id="Sequence_571" sap:VirtualizedContainerService.HintSize="816,51">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-            <x:Boolean x:Key="IsPinned">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
@@ -3375,7 +3695,7 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_364" sap:VirtualizedContainerService.HintSize="816,2391">
+      <sap2010:ViewStateData Id="Sequence_364" sap:VirtualizedContainerService.HintSize="816,51">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -3420,24 +3740,31 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="ForEach`1_111" sap:VirtualizedContainerService.HintSize="772,280" />
-      <sap2010:ViewStateData Id="AddDataRow_8" sap:VirtualizedContainerService.HintSize="314,22" />
-      <sap2010:ViewStateData Id="MessageBox_57" sap:VirtualizedContainerService.HintSize="314,59" />
-      <sap2010:ViewStateData Id="Sequence_583" sap:VirtualizedContainerService.HintSize="336,245">
+      <sap2010:ViewStateData Id="AddDataRow_9" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Sequence_583" sap:VirtualizedContainerService.HintSize="222,146">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="If_303" sap:VirtualizedContainerService.HintSize="464,393" />
-      <sap2010:ViewStateData Id="Sequence_582" sap:VirtualizedContainerService.HintSize="486,517">
+      <sap2010:ViewStateData Id="Comment_197" sap:VirtualizedContainerService.HintSize="314,55" />
+      <sap2010:ViewStateData Id="If_303" sap:VirtualizedContainerService.HintSize="561,294" />
+      <sap2010:ViewStateData Id="Sequence_582" sap:VirtualizedContainerService.HintSize="583,418">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ForEach`1_112" sap:VirtualizedContainerService.HintSize="772,651" />
+      <sap2010:ViewStateData Id="ForEach`1_112" sap:VirtualizedContainerService.HintSize="772,552">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="ExecuteXPath_18" sap:VirtualizedContainerService.HintSize="314,89" />
       <sap2010:ViewStateData Id="Comment_107" sap:VirtualizedContainerService.HintSize="314,132" />
       <sap2010:ViewStateData Id="Assign_639" sap:VirtualizedContainerService.HintSize="242,60" />
@@ -3592,14 +3919,14 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_372" sap:VirtualizedContainerService.HintSize="794,7616">
+      <sap2010:ViewStateData Id="Sequence_372" sap:VirtualizedContainerService.HintSize="794,7517">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_373" sap:VirtualizedContainerService.HintSize="816,7740">
+      <sap2010:ViewStateData Id="Sequence_373" sap:VirtualizedContainerService.HintSize="816,51">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -3625,7 +3952,7 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
       <sap2010:ViewStateData Id="Assign_657" sap:VirtualizedContainerService.HintSize="242,60" />
       <sap2010:ViewStateData Id="Rethrow_19" sap:VirtualizedContainerService.HintSize="200,22" />
       <sap2010:ViewStateData Id="If_153" sap:VirtualizedContainerService.HintSize="467,208" />
-      <sap2010:ViewStateData Id="Catch`1_79" sap:VirtualizedContainerService.HintSize="473,277">
+      <sap2010:ViewStateData Id="Catch`1_79" sap:VirtualizedContainerService.HintSize="473,281">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -3633,7 +3960,7 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="TryCatch_78" sap:VirtualizedContainerService.HintSize="487,1060">
+      <sap2010:ViewStateData Id="TryCatch_78" sap:VirtualizedContainerService.HintSize="487,1064">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -3641,7 +3968,7 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="DoWhile_15" sap:VirtualizedContainerService.HintSize="542,1222">
+      <sap2010:ViewStateData Id="DoWhile_15" sap:VirtualizedContainerService.HintSize="542,1226">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -3694,7 +4021,7 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_377" sap:VirtualizedContainerService.HintSize="816,3265">
+      <sap2010:ViewStateData Id="Sequence_377" sap:VirtualizedContainerService.HintSize="816,51">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -3872,7 +4199,7 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_384" sap:VirtualizedContainerService.HintSize="816,994">
+      <sap2010:ViewStateData Id="Sequence_384" sap:VirtualizedContainerService.HintSize="816,51">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -3880,15 +4207,15 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Assign_670" sap:VirtualizedContainerService.HintSize="602,60" />
-      <sap2010:ViewStateData Id="Assign_732" sap:VirtualizedContainerService.HintSize="602,60" />
-      <sap2010:ViewStateData Id="Assign_671" sap:VirtualizedContainerService.HintSize="602,60" />
-      <sap2010:ViewStateData Id="AddToCollection`1_78" sap:VirtualizedContainerService.HintSize="564,22" />
-      <sap2010:ViewStateData Id="AddToCollection`1_91" sap:VirtualizedContainerService.HintSize="564,22" />
-      <sap2010:ViewStateData Id="Assign_672" sap:VirtualizedContainerService.HintSize="542,60" />
-      <sap2010:ViewStateData Id="Assign_673" sap:VirtualizedContainerService.HintSize="542,60" />
-      <sap2010:ViewStateData Id="Assign_674" sap:VirtualizedContainerService.HintSize="542,60" />
-      <sap2010:ViewStateData Id="Assign_675" sap:VirtualizedContainerService.HintSize="542,64" />
+      <sap2010:ViewStateData Id="Assign_670" sap:VirtualizedContainerService.HintSize="287,60" />
+      <sap2010:ViewStateData Id="Assign_732" sap:VirtualizedContainerService.HintSize="287,60" />
+      <sap2010:ViewStateData Id="Assign_671" sap:VirtualizedContainerService.HintSize="287,60" />
+      <sap2010:ViewStateData Id="AddToCollection`1_78" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="AddToCollection`1_91" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Assign_672" sap:VirtualizedContainerService.HintSize="418,60" />
+      <sap2010:ViewStateData Id="Assign_673" sap:VirtualizedContainerService.HintSize="418,60" />
+      <sap2010:ViewStateData Id="Assign_674" sap:VirtualizedContainerService.HintSize="418,60" />
+      <sap2010:ViewStateData Id="Assign_675" sap:VirtualizedContainerService.HintSize="418,64" />
       <sap2010:ViewStateData Id="HttpClient_26" sap:VirtualizedContainerService.HintSize="314,22" />
       <sap2010:ViewStateData Id="DeserializeXml_32" sap:VirtualizedContainerService.HintSize="314,60" />
       <sap2010:ViewStateData Id="WriteTextFile_26" sap:VirtualizedContainerService.HintSize="314,87" />
@@ -3920,11 +4247,11 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="DoWhile_17" sap:VirtualizedContainerService.HintSize="542,51">
+      <sap2010:ViewStateData Id="DoWhile_17" sap:VirtualizedContainerService.HintSize="418,51">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-            <x:Boolean x:Key="IsPinned">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
@@ -3956,11 +4283,11 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_442" sap:VirtualizedContainerService.HintSize="524,1105">
+      <sap2010:ViewStateData Id="Sequence_442" sap:VirtualizedContainerService.HintSize="200,51">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-            <x:Boolean x:Key="IsPinned">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
@@ -3973,8 +4300,8 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="TryCatch_89" sap:VirtualizedContainerService.HintSize="542,534" />
-      <sap2010:ViewStateData Id="Sequence_386" sap:VirtualizedContainerService.HintSize="564,1153">
+      <sap2010:ViewStateData Id="TryCatch_89" sap:VirtualizedContainerService.HintSize="418,534" />
+      <sap2010:ViewStateData Id="Sequence_386" sap:VirtualizedContainerService.HintSize="200,51">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -3982,14 +4309,7 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_387" sap:VirtualizedContainerService.HintSize="586,1401">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ForEach`1_78" sap:VirtualizedContainerService.HintSize="602,1535">
+      <sap2010:ViewStateData Id="Sequence_387" sap:VirtualizedContainerService.HintSize="222,299">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -3997,7 +4317,53 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_388" sap:VirtualizedContainerService.HintSize="624,1959">
+      <sap2010:ViewStateData Id="ForEach`1_78" sap:VirtualizedContainerService.HintSize="287,433">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_388" sap:VirtualizedContainerService.HintSize="723,857">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_694" sap:VirtualizedContainerService.HintSize="661,60" />
+      <sap2010:ViewStateData Id="Assign_1295" sap:VirtualizedContainerService.HintSize="514,60" />
+      <sap2010:ViewStateData Id="StartProcess_3" sap:VirtualizedContainerService.HintSize="476,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Comment_198" sap:VirtualizedContainerService.HintSize="418,74" />
+      <sap2010:ViewStateData Id="SendHotkey_14" sap:VirtualizedContainerService.HintSize="418,51" />
+      <sap2010:ViewStateData Id="SendHotkey_15" sap:VirtualizedContainerService.HintSize="418,51" />
+      <sap2010:ViewStateData Id="SendHotkey_16" sap:VirtualizedContainerService.HintSize="418,51" />
+      <sap2010:ViewStateData Id="Comment_199" sap:VirtualizedContainerService.HintSize="418,74" />
+      <sap2010:ViewStateData Id="GoogleOCR_7" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="GetOCRText_7" sap:VirtualizedContainerService.HintSize="314,208">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="GoogleOCR_8" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="GetOCRText_8" sap:VirtualizedContainerService.HintSize="314,168">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Catch`1_94" sap:VirtualizedContainerService.HintSize="404,21">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -4005,43 +4371,198 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Assign_694" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_678" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Assign_679" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Sequence_489" sap:VirtualizedContainerService.HintSize="264,184">
+      <sap2010:ViewStateData Id="TryCatch_93" sap:VirtualizedContainerService.HintSize="418,435">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="CommentOut_10" sap:VirtualizedContainerService.HintSize="242,51">
+      <sap2010:ViewStateData Id="Sequence_602" sap:VirtualizedContainerService.HintSize="440,1060">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-            <x:Boolean x:Key="IsPinned">True</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Assign_791" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Sequence_389" sap:VirtualizedContainerService.HintSize="264,475">
+      <sap2010:ViewStateData Id="WindowScope_6" sap:VirtualizedContainerService.HintSize="454,1246">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_594" sap:VirtualizedContainerService.HintSize="476,1370">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="CloseApplication_2" sap:VirtualizedContainerService.HintSize="472,51" />
+      <sap2010:ViewStateData Id="Assign_1298" sap:VirtualizedContainerService.HintSize="472,60" />
+      <sap2010:ViewStateData Id="Break_2" sap:VirtualizedContainerService.HintSize="472,22" />
+      <sap2010:ViewStateData Id="Sequence_595" sap:VirtualizedContainerService.HintSize="498,1874">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_114" sap:VirtualizedContainerService.HintSize="514,2008">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_596" sap:VirtualizedContainerService.HintSize="536,2232">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_304" sap:VirtualizedContainerService.HintSize="661,2380">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_678" sap:VirtualizedContainerService.HintSize="661,60" />
+      <sap2010:ViewStateData Id="Assign_791" sap:VirtualizedContainerService.HintSize="661,60" />
+      <sap2010:ViewStateData Id="Sequence_389" sap:VirtualizedContainerService.HintSize="683,2804">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_1308" sap:VirtualizedContainerService.HintSize="514,60" />
+      <sap2010:ViewStateData Id="StartProcess_4" sap:VirtualizedContainerService.HintSize="476,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SendHotkey_17" sap:VirtualizedContainerService.HintSize="414,51" />
+      <sap2010:ViewStateData Id="SendHotkey_18" sap:VirtualizedContainerService.HintSize="414,51" />
+      <sap2010:ViewStateData Id="SendHotkey_19" sap:VirtualizedContainerService.HintSize="414,51" />
+      <sap2010:ViewStateData Id="GoogleOCR_9" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="GetOCRText_9" sap:VirtualizedContainerService.HintSize="314,208">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="GoogleOCR_10" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="GetOCRText_10" sap:VirtualizedContainerService.HintSize="314,168">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Catch`1_95" sap:VirtualizedContainerService.HintSize="404,21">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="TryCatch_94" sap:VirtualizedContainerService.HintSize="418,435">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_608" sap:VirtualizedContainerService.HintSize="440,832">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WindowScope_7" sap:VirtualizedContainerService.HintSize="454,1018">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_609" sap:VirtualizedContainerService.HintSize="476,1142">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="CloseApplication_3" sap:VirtualizedContainerService.HintSize="476,51" />
+      <sap2010:ViewStateData Id="Assign_1309" sap:VirtualizedContainerService.HintSize="476,60" />
+      <sap2010:ViewStateData Id="Break_4" sap:VirtualizedContainerService.HintSize="472,22" />
+      <sap2010:ViewStateData Id="Sequence_610" sap:VirtualizedContainerService.HintSize="498,1646">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_117" sap:VirtualizedContainerService.HintSize="514,1780">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="Assign_680" sap:VirtualizedContainerService.HintSize="242,60" />
       <sap2010:ViewStateData Id="AddToCollection`1_79" sap:VirtualizedContainerService.HintSize="242,22" />
-      <sap2010:ViewStateData Id="Sequence_390" sap:VirtualizedContainerService.HintSize="264,246">
+      <sap2010:ViewStateData Id="Sequence_612" sap:VirtualizedContainerService.HintSize="264,246">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Catch`1_84" sap:VirtualizedContainerService.HintSize="404,319">
+      <sap2010:ViewStateData Id="If_307" sap:VirtualizedContainerService.HintSize="510,394">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_611" sap:VirtualizedContainerService.HintSize="536,2438">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_390" sap:VirtualizedContainerService.HintSize="558,2562">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Catch`1_84" sap:VirtualizedContainerService.HintSize="687,21">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -4049,45 +4570,91 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="TryCatch_83" sap:VirtualizedContainerService.HintSize="418,1104" />
-      <sap2010:ViewStateData Id="Sequence_391" sap:VirtualizedContainerService.HintSize="624,1228">
+      <sap2010:ViewStateData Id="TryCatch_83" sap:VirtualizedContainerService.HintSize="701,3031">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
             <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Assign_695" sap:VirtualizedContainerService.HintSize="502,60" />
+      <sap2010:ViewStateData Id="Sequence_391" sap:VirtualizedContainerService.HintSize="723,3155">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_695" sap:VirtualizedContainerService.HintSize="649,60" />
       <sap2010:ViewStateData Id="Assign_696" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="If_171" sap:VirtualizedContainerService.HintSize="464,208" />
+      <sap2010:ViewStateData Id="If_171" sap:VirtualizedContainerService.HintSize="464,208">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="Sequence_418" sap:VirtualizedContainerService.HintSize="486,332">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ForEach`1_84" sap:VirtualizedContainerService.HintSize="502,466" />
-      <sap2010:ViewStateData Id="Comment_123" sap:VirtualizedContainerService.HintSize="314,74" />
-      <sap2010:ViewStateData Id="AddDataRow_4" sap:VirtualizedContainerService.HintSize="314,22" />
-      <sap2010:ViewStateData Id="Sequence_428" sap:VirtualizedContainerService.HintSize="336,260">
+      <sap2010:ViewStateData Id="ForEach`1_84" sap:VirtualizedContainerService.HintSize="649,466">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_1307" sap:VirtualizedContainerService.HintSize="502,60" />
+      <sap2010:ViewStateData Id="Assign_1304" sap:VirtualizedContainerService.HintSize="464,60" />
+      <sap2010:ViewStateData Id="Assign_1305" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="AddDataRow_13" sap:VirtualizedContainerService.HintSize="242,22" />
+      <sap2010:ViewStateData Id="Break_3" sap:VirtualizedContainerService.HintSize="242,22" />
+      <sap2010:ViewStateData Id="Sequence_605" sap:VirtualizedContainerService.HintSize="264,308">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_306" sap:VirtualizedContainerService.HintSize="464,456" />
+      <sap2010:ViewStateData Id="Sequence_606" sap:VirtualizedContainerService.HintSize="486,680">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="If_172" sap:VirtualizedContainerService.HintSize="502,408" />
-      <sap2010:ViewStateData Id="Sequence_417" sap:VirtualizedContainerService.HintSize="624,1138">
+      <sap2010:ViewStateData Id="ForEach`1_116" sap:VirtualizedContainerService.HintSize="502,814" />
+      <sap2010:ViewStateData Id="Assign_1306" sap:VirtualizedContainerService.HintSize="502,60" />
+      <sap2010:ViewStateData Id="Sequence_607" sap:VirtualizedContainerService.HintSize="524,1138">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_172" sap:VirtualizedContainerService.HintSize="649,1286">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_445" sap:VirtualizedContainerService.HintSize="816,4529">
+      <sap2010:ViewStateData Id="Sequence_417" sap:VirtualizedContainerService.HintSize="723,2016">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_445" sap:VirtualizedContainerService.HintSize="816,6232">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -4095,7 +4662,7 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="Assign_681" sap:VirtualizedContainerService.HintSize="816,60" />
-      <sap2010:ViewStateData Id="Sequence_392" sap:VirtualizedContainerService.HintSize="838,26032">
+      <sap2010:ViewStateData Id="Sequence_392" sap:VirtualizedContainerService.HintSize="838,11320">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -4103,11 +4670,11 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_393" sap:VirtualizedContainerService.HintSize="860,26332">
+      <sap2010:ViewStateData Id="Sequence_393" sap:VirtualizedContainerService.HintSize="860,11620">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-            <x:Boolean x:Key="IsPinned">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
@@ -4593,7 +5160,7 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_488" sap:VirtualizedContainerService.HintSize="860,9968">
+      <sap2010:ViewStateData Id="Sequence_488" sap:VirtualizedContainerService.HintSize="314,51">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -4601,13 +5168,13 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="AddToCollection`1_95" sap:VirtualizedContainerService.HintSize="860,22" />
-      <sap2010:ViewStateData Id="Assign_1087" sap:VirtualizedContainerService.HintSize="860,60" />
-      <sap2010:ViewStateData Id="Sequence_413" sap:VirtualizedContainerService.HintSize="882,44616">
+      <sap2010:ViewStateData Id="AddToCollection`1_95" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="Assign_1087" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Sequence_413" sap:VirtualizedContainerService.HintSize="882,19577">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-            <x:Boolean x:Key="IsPinned">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
@@ -4622,7 +5189,7 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Catch`1_85" sap:VirtualizedContainerService.HintSize="404,450">
+      <sap2010:ViewStateData Id="Catch`1_85" sap:VirtualizedContainerService.HintSize="404,21">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -4630,7 +5197,7 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="TryCatch_84" sap:VirtualizedContainerService.HintSize="418,820">
+      <sap2010:ViewStateData Id="TryCatch_84" sap:VirtualizedContainerService.HintSize="900,19908">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -4638,7 +5205,7 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ForEach`1_82" sap:VirtualizedContainerService.HintSize="200,51">
+      <sap2010:ViewStateData Id="ForEach`1_82" sap:VirtualizedContainerService.HintSize="916,20042">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -4697,8 +5264,9 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="Assign_770" sap:VirtualizedContainerService.HintSize="242,60" />
       <sap2010:ViewStateData Id="Assign_768" sap:VirtualizedContainerService.HintSize="242,64" />
+      <sap2010:ViewStateData Id="Assign_1296" sap:VirtualizedContainerService.HintSize="601,64" />
       <sap2010:ViewStateData Id="Assign_1124" sap:VirtualizedContainerService.HintSize="601,60" />
-      <sap2010:ViewStateData Id="Assign_1234" sap:VirtualizedContainerService.HintSize="601,60" />
+      <sap2010:ViewStateData Id="Assign_1310" sap:VirtualizedContainerService.HintSize="553,60" />
       <sap2010:ViewStateData Id="Assign_1190" sap:VirtualizedContainerService.HintSize="553,60" />
       <sap2010:ViewStateData Id="Assign_1192" sap:VirtualizedContainerService.HintSize="553,60" />
       <sap2010:ViewStateData Id="Assign_1193" sap:VirtualizedContainerService.HintSize="553,60" />
@@ -4735,7 +5303,7 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="If_286" sap:VirtualizedContainerService.HintSize="553,436" />
       <sap2010:ViewStateData Id="Assign_1233" sap:VirtualizedContainerService.HintSize="553,60" />
-      <sap2010:ViewStateData Id="Sequence_556" sap:VirtualizedContainerService.HintSize="575,1780">
+      <sap2010:ViewStateData Id="Sequence_556" sap:VirtualizedContainerService.HintSize="575,1880">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -4743,7 +5311,7 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="While_5" sap:VirtualizedContainerService.HintSize="601,1938">
+      <sap2010:ViewStateData Id="While_5" sap:VirtualizedContainerService.HintSize="601,2038">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -4751,7 +5319,7 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_541" sap:VirtualizedContainerService.HintSize="200,51">
+      <sap2010:ViewStateData Id="Sequence_541" sap:VirtualizedContainerService.HintSize="623,2366">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -4974,7 +5542,7 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Flowchart_1" sap:VirtualizedContainerService.HintSize="1011,1522">
+      <sap2010:ViewStateData Id="Flowchart_1" sap:VirtualizedContainerService.HintSize="1011,1622">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -4982,14 +5550,15 @@ totalFilesChecked.ToString + " Pre-Negotiation Memoranda were generated.&lt;br&g
             <av:Size x:Key="ShapeSize">60,75</av:Size>
             <x:Double x:Key="Width">997</x:Double>
             <av:PointCollection x:Key="ConnectorLocation">550,77.4 550,114.5</av:PointCollection>
-            <x:Double x:Key="Height">1485.5</x:Double>
+            <x:Double x:Key="Height">1585.5</x:Double>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="MainFlowchart_1" sap:VirtualizedContainerService.HintSize="1051,1602">
+      <sap2010:ViewStateData Id="MainFlowchart_1" sap:VirtualizedContainerService.HintSize="1051,1702">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
+            <x:Boolean x:Key="ShouldCollapseAll">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
