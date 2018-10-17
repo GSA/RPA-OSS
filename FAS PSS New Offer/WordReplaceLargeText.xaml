@@ -1,0 +1,169 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="WordReplaceLargeText"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:p="http://schemas.uipath.com/workflow/activities/word"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="PatternToReplace" Type="InArgument(x:String)" />
+    <x:Property Name="ReplacementText" Type="InArgument(x:String)" />
+    <x:Property Name="WordDocumentPath" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>TestMultiline_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Core</AssemblyReference>
+      <AssemblyReference>UiPath.Core.Activities</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="WordReplaceLargeText" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:Int32" Default="255" Name="maxChunkLength" />
+      <Variable x:TypeArguments="x:Int32" Name="chunksCount" />
+    </Sequence.Variables>
+    <Assign sap2010:Annotation.AnnotationText="PatternToReplace text needs to be added at the end of the current chunk." DisplayName="Recompute maxChunkLength" sap2010:WorkflowViewState.IdRef="Assign_4">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:Int32">[maxChunkLength]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:Int32">[maxChunkLength - PatternToReplace.Length]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="Compute number of chunks" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:Int32">[chunksCount]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:Int32">[cint(Math.Ceiling(ReplacementText.Length / maxChunkLength))]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <p:WordApplicationScope DisplayName="Word Application Scope" FilePath="[WordDocumentPath]" sap2010:WorkflowViewState.IdRef="WordApplicationScope_1">
+      <p:WordApplicationScope.Body>
+        <ActivityAction x:TypeArguments="ui:WordDocument">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="ui:WordDocument" Name="WordDocumentScope" />
+          </ActivityAction.Argument>
+          <Sequence sap2010:Annotation.AnnotationText="Replace the pattern with chunk text but still put the pattern at the end for the next replacement iteration. The last replacement will not put the pattern anymore." DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:Int32" Name="index" />
+            </Sequence.Variables>
+            <Assign sap2010:WorkflowViewState.IdRef="Assign_2">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Int32">[index]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Int32">0</InArgument>
+              </Assign.Value>
+            </Assign>
+            <While sap2010:WorkflowViewState.IdRef="While_1" Condition="[index &lt; chunksCount - 1]">
+              <Sequence DisplayName="Replace pattern with text + pattern" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_3" Replace="[ReplacementText.Substring(index * maxChunkLength, maxChunkLength) + PatternToReplace]" Search="[PatternToReplace]" />
+                <Assign sap2010:WorkflowViewState.IdRef="Assign_3">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:Int32">[index]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:Int32">[index + 1]</InArgument>
+                  </Assign.Value>
+                </Assign>
+              </Sequence>
+            </While>
+            <p:WordReplaceText Found="{x:Null}" DisplayName="Replace last chunk, without pattern at the end" sap2010:WorkflowViewState.IdRef="WordReplaceText_2" Replace="[ReplacementText.Substring(index * maxChunkLength)]" Search="[PatternToReplace]" />
+          </Sequence>
+        </ActivityAction>
+      </p:WordApplicationScope.Body>
+    </p:WordApplicationScope>
+    <sads:DebugSymbol.Symbol>d05DOlxVc2Vyc1xpbGl1dGFcRG9jdW1lbnRzXFVpUGF0aFxTY2FubmluZ19NZXhpY29fQUhWXFdvcmRSZXBsYWNlTGFyZ2VUZXh0LnhhbWwaRQN/DgIBAUczRzgCAQJKBVEOAgEpUgVZDgIBJVoFfR4CAQNPL09ZAgEsTDBMQAIBKlcvV2wCAShUMFQ9AgEmWktaXwIBI2ALehYCAQRkDWsWAgEfbA14FQIBDHkNef4BAgEFaTdpOAIBImY4Zj8CASBtD3caAgEQbEhsZgIBDXnnAXn7AQIBCnmqAXnfAQIBBm4RboMCAgEWbxF2GgIBEW7sAW6AAgIBHW6MAW7kAQIBF3Q7dEYCARRxPHFDAgES</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="500,117">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="500,60" />
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="464,60" />
+      <sap2010:ViewStateData Id="WordReplaceText_3" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="336,283">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="While_1" sap:VirtualizedContainerService.HintSize="464,440" />
+      <sap2010:ViewStateData Id="WordReplaceText_2" sap:VirtualizedContainerService.HintSize="464,59" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="486,805">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WordApplicationScope_1" sap:VirtualizedContainerService.HintSize="500,914" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="522,1295">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="TestMultiline_1" sap:VirtualizedContainerService.HintSize="562,1375" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>
