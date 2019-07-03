@@ -2,7 +2,6 @@
  xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
  xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
- xmlns:s="clr-namespace:System;assembly=mscorlib"
  xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
  xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
  xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
@@ -74,8 +73,8 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Mail</AssemblyReference>
       <AssemblyReference>System.ValueTuple</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
       <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence sap2010:Annotation.AnnotationText="Description: In this file all other process specific files will be invoked. If an application exception occurs, the current transaction can be retried. If a BRE is thrown, the transaction will be skipped. Can be a flowchart or sequence. " DisplayName="Process" sap2010:WorkflowViewState.IdRef="Sequence_175">
@@ -85,8 +84,6 @@
       <Variable x:TypeArguments="x:String" Name="vendorUploadFile" />
       <Variable x:TypeArguments="sd:DataTable" Name="vendorUpload" />
       <Variable x:TypeArguments="sd:DataTable" Name="resultsTable" />
-      <Variable x:TypeArguments="scg:Dictionary(x:String, s:String[])" Name="diffs" />
-      <Variable x:TypeArguments="scg:Dictionary(x:String, s:String[])" Name="matches" />
     </Sequence.Variables>
     <Assign sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
@@ -209,7 +206,7 @@
                       <InArgument x:TypeArguments="x:String">[vendorUpload.Rows(foundRowIndex)("description").ToString]</InArgument>
                     </Assign.Value>
                   </Assign>
-                  <If Condition="[Double.Parse(row(&quot;Proposed Price&quot;).ToString) = Double.Parse(price)]" sap2010:WorkflowViewState.IdRef="If_1">
+                  <If Condition="[Double.Parse(row(&quot;Proposed Price&quot;).ToString) = Double.Parse(price)]" DisplayName="compare price" sap2010:WorkflowViewState.IdRef="If_1">
                     <If.Then>
                       <InvokeMethod DisplayName="Invoke method" sap2010:WorkflowViewState.IdRef="InvokeMethod_1" MethodName="Add">
                         <InvokeMethod.TargetObject>
@@ -227,7 +224,7 @@
                       </InvokeMethod>
                     </If.Else>
                   </If>
-                  <If Condition="[row(&quot;Manufacturer Name&quot;).ToString.ToLower.Equals(mfg.ToLower)]" sap2010:WorkflowViewState.IdRef="If_2">
+                  <If Condition="[row(&quot;Manufacturer Name&quot;).ToString.ToLower.Equals(mfg.ToLower)]" DisplayName="compare manufacturer" sap2010:WorkflowViewState.IdRef="If_2">
                     <If.Then>
                       <InvokeMethod DisplayName="Invoke method" sap2010:WorkflowViewState.IdRef="InvokeMethod_3" MethodName="Add">
                         <InvokeMethod.TargetObject>
@@ -263,7 +260,7 @@
                       </InvokeMethod>
                     </If.Else>
                   </If>
-                  <If Condition="[row(&quot;Vendor Description&quot;).ToString.ToLower.Equals(description.ToLower)]" sap2010:WorkflowViewState.IdRef="If_4">
+                  <If Condition="[row(&quot;Vendor Description&quot;).ToString.ToLower.Equals(description.ToLower)]" DisplayName="check description" sap2010:WorkflowViewState.IdRef="If_4">
                     <If.Then>
                       <InvokeMethod DisplayName="Invoke method" sap2010:WorkflowViewState.IdRef="InvokeMethod_7" MethodName="Add">
                         <InvokeMethod.TargetObject>
@@ -284,7 +281,7 @@
                 </Sequence>
               </If.Then>
               <If.Else>
-                <InvokeMethod DisplayName="Invoke method" sap2010:WorkflowViewState.IdRef="InvokeMethod_9" MethodName="Add">
+                <InvokeMethod DisplayName="issue - item not found" sap2010:WorkflowViewState.IdRef="InvokeMethod_9" MethodName="Add">
                   <InvokeMethod.TargetObject>
                     <InArgument x:TypeArguments="scg:List(x:String)">[errorList]</InArgument>
                   </InvokeMethod.TargetObject>
@@ -304,8 +301,10 @@
         </ActivityAction>
       </ui:ForEachRow.Body>
     </ui:ForEachRow>
-    <ui:WriteRange AddHeaders="True" DataTable="[resultsTable]" DisplayName="Write Range" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Sheet1" StartingCell="A1" WorkbookPath="[in_config(&quot;outputFileLocation&quot;).ToString + in_transactionItem(&quot;Output&quot;).ToString]" />
-    <sads:DebugSymbol.Symbol>d0tDOlxVc2Vyc1xta2ltZXJ5XERvY3VtZW50c1xHU0FcUlBBLU9TUy1tYXN0ZXJcQ2F0YWxvZ0ZyYW1ld29ya1xwcm9jZXNzLnhhbWxpUQO1Ag4CAQFbBWIOAwGIAWMFaRQDAYEBagVxDgIBfXIFeBQCAXZ5BXm6CwIBc3oFsgIVAgEIswIFswKnAgIBAmAwYH8DAYsBXTFdPwMBiQFjL2M8AwGGAWYLZjoDAYUBY5MBY5wBAwGEAWOqAWO6AQMBggFvMG+HAQMBgAFsMWxDAgF+ci9yPwIBe3ULdToCAXpymQFyoQECAXlyrwFywwECAXd5InkyAgF0ejZ6QwIBcYABC68CFgIBCbMCqgGzAq4BAgEHswIwswJAAgEFswKUAbMCnAECAQSzArwBswKkAgIBA4gBO4gBPgIBCowBDZMBFgIBbZQBDZsBFgIBaZwBDaMBFgIBZaQBDaQBrgMCAV6lAQ2mAhICARenAg2uAhICAQuRAUKRAVcCAXCOAUOOAU4CAW6ZAUKZAVcCAWyWAUOWAU4CAWqhATihAU0CAWieATmeAT4CAWakAZoDpAGrAwIBY6QB2gKkAZADAgFipAHEAqQBzQICAWGkAc4BpAHeAQIBX6UBG6UBMwIBGKcBEZwCHAIBHp8CEaQCIAIBGqcCG6cCQgIBDKkCEakC5wICAROsAhGsAsoCAgEPqwETqwG0AQIBW6wBE7MBHAIBV7QBE7sBHAIBU7wBE8MBHAIBT8QBE8sBHAIBS8wBE9MBHAIBR9QBE+UBGAIBPeYBE/cBGAIBM/gBE4kCGAIBKYoCE5sCGAIBH6ECRqECUQIBHKMCOqMCSAIBG6kC+gGpAooCAgEVqQI8qQLvAQIBFKwC3QGsAu0BAgERrAI8rALSAQIBEKsBgAGrAbEBAgFcsQE+sQF1AgFargE/rgFGAgFYuQE+uQF0AgFWtgE/tgFEAgFUwQE+wQF1AgFSvgE/vgFFAgFQyQE+yQFzAgFOxgE/xgFIAgFM0QE+0QF4AgFKzgE/zgFMAgFI1AEh1AFxAgE+1gEX2wEmAgFD3gEX4wEmAgE/5gEh5gFsAgE06AEX7QEmAgE58AEX9QEmAgE1+AEh+AF6AgEq+gEX/wEmAgEvggIXhwImAgErigIhigJ1AgEgjAIXkQImAgEllAIXmQImAgEh2AFM2AFXAgFF2gFA2gFLAgFE4AFM4AFXAgFB4gFA4gFUAgFA6gFM6gFXAgE77AFA7AFJAgE68gFM8gFXAgE39AFA9AFSAgE2/AFM/AFXAgEx/gFA/gFMAgEwhAJMhAJXAgEthgJAhgJfAgEsjgJMjgJXAgEnkAJAkAJRAgEmlgJMlgJXAgEjmAJAmAJaAgEi</sads:DebugSymbol.Symbol>
+    <ui:WriteCell Cell="A1" DisplayName="Write Cell" sap2010:WorkflowViewState.IdRef="WriteCell_1" SheetName="Summary" Text="[&quot;Total items in 4P output: &quot;+results4P.Rows.Count.ToString]" WorkbookPath="[in_config(&quot;outputFileLocation&quot;).ToString + in_transactionItem(&quot;Output&quot;).ToString]" />
+    <ui:WriteCell Cell="A2" DisplayName="Write Cell" sap2010:WorkflowViewState.IdRef="WriteCell_2" SheetName="Summary" Text="[&quot;Total items uploaded by vendorUpload: &quot;+vendorUpload.Rows.Count.ToString]" WorkbookPath="[in_config(&quot;outputFileLocation&quot;).ToString + in_transactionItem(&quot;Output&quot;).ToString]" />
+    <ui:WriteRange AddHeaders="True" DataTable="[resultsTable]" DisplayName="Write Range" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Detail Results" StartingCell="A1" WorkbookPath="[in_config(&quot;outputFileLocation&quot;).ToString + in_transactionItem(&quot;Output&quot;).ToString]" />
+    <sads:DebugSymbol.Symbol>d0tDOlxVc2Vyc1xta2ltZXJ5XERvY3VtZW50c1xHU0FcUlBBLU9TUy1tYXN0ZXJcQ2F0YWxvZ0ZyYW1ld29ya1xwcm9jZXNzLnhhbWxzUAO0Ag4CAQFYBV8OAwGSAWAFZhQDAYsBZwVuDgMBhwFvBXUUAwGAAXYFdroLAgF9dwWvAhUCARKwAgWwAr4CAgENsQIFsQLNAgIBCLICBbICrwICAQJdMF1/AwGVAVoxWj8DAZMBYC9gPAMBkAFjC2M6AwGPAWCTAWCcAQMBjgFgqgFgugEDAYwBbDBshwEDAYoBaTFpQwMBiAFvL28/AwGFAXILcjoDAYQBb5kBb6EBAwGDAW+vAW/DAQMBgQF2InYyAgF+dzZ3QwIBe30LrAIWAgETsAIYsAIcAgERsAJ9sALFAQIBELACbrACdwIBD7AC0wGwArsCAgEOsQIYsQIcAgEMsQJ9sQLUAQIBC7ECbrECdwIBCrEC4gGxAsoCAgEJsgKyAbICtgECAQeyAjCyAkACAQWyApQBsgKkAQIBBLICxAGyAqwCAgEDhQE7hQE+AgEUiQENkAEWAgF3kQENmAEWAgFzmQENoAEWAgFvoQENoQGuAwIBaKIBDaMCEgIBIaQCDasCEgIBFY4BQo4BVwIBeosBQ4sBTgIBeJYBQpYBVwIBdpMBQ5MBTgIBdJ4BOJ4BTQIBcpsBOZsBPgIBcKEBmgOhAasDAgFtoQHaAqEBkAMCAWyhAcQCoQHNAgIBa6EBzgGhAd4BAgFpogEbogEzAgEipAERmQIcAgEonAIRoQIgAgEkpAIbpAJCAgEWpgIRpgLnAgIBHakCEakCygICARmoAROoAbQBAgFlqQETsAEcAgFhsQETuAEcAgFduQETwAEcAgFZwQETyAEcAgFVyQET0AEcAgFR0QET4gEYAgFH4wET9AEYAgE99QEThgIYAgEzhwITmAIYAgEpngJGngJRAgEmoAI6oAJIAgElpgL6AaYCigICAR+mAjymAu8BAgEeqQLdAakC7QECARupAjypAtIBAgEaqAGAAagBsQECAWauAT6uAXUCAWSrAT+rAUYCAWK2AT62AXQCAWCzAT+zAUQCAV6+AT6+AXUCAVy7AT+7AUUCAVrGAT7GAXMCAVjDAT/DAUgCAVbOAT7OAXgCAVTLAT/LAUwCAVLRASHRAXECAUjTARfYASYCAU3bARfgASYCAUnjASHjAWwCAT7lARfqASYCAUPtARfyASYCAT/1ASH1AXoCATT3ARf8ASYCATn/AReEAiYCATWHAiGHAnUCASqJAheOAiYCAS+RAheWAiYCASvVAUzVAVcCAU/XAUDXAUsCAU7dAUzdAVcCAUvfAUDfAVQCAUrnAUznAVcCAUXpAUDpAUkCAUTvAUzvAVcCAUHxAUDxAVICAUD5AUz5AVcCATv7AUD7AUwCATqBAkyBAlcCATeDAkCDAl8CATaLAkyLAlcCATGNAkCNAlECATCTAkyTAlcCAS2VAkCVAloCASw=</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -388,6 +387,8 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WriteCell_1" sap:VirtualizedContainerService.HintSize="781,115" />
+      <sap2010:ViewStateData Id="WriteCell_2" sap:VirtualizedContainerService.HintSize="781,115" />
       <sap2010:ViewStateData Id="WriteRange_1" sap:VirtualizedContainerService.HintSize="781,115">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -395,7 +396,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_175" sap:VirtualizedContainerService.HintSize="803,3899">
+      <sap2010:ViewStateData Id="Sequence_175" sap:VirtualizedContainerService.HintSize="803,4209">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -403,7 +404,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ProcessTransaction_1" sap:VirtualizedContainerService.HintSize="843,5727">
+      <sap2010:ViewStateData Id="ProcessTransaction_1" sap:VirtualizedContainerService.HintSize="843,4289">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="ShouldCollapseAll">False</x:Boolean>
