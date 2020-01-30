@@ -1,0 +1,22 @@
+{
+  "name": "FAS PSS New Offer",
+  "description": "Project",
+  "main": "API_Mainworkflow.xaml",
+  "dependencies": {
+    "Microsoft.Activities": "1.0.1.0",
+    "Microsoft.Activities.Extensions": "2.0.6.9",
+    "UiPath.Core.Activities": "18.2.6745.15248",
+    "UiPath.Excel.Activities": "2.3.6682.26635",
+    "UiPath.Mail.Activities": "1.1.6562.21018",
+    "UiPath.WebAPI.Activities": "1.4.4.0",
+    "UiPath.Word.Activities": "1.3.4.0"
+  },
+  "excludedData": [
+    "Private:*",
+    "*password*"
+  ],
+  "toolVersion": "18.2",
+  "projectVersion": "1.0.7311.27650",
+  "packOptions": {},
+  "runtimeOptions": {}
+}

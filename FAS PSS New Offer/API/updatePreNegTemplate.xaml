@@ -1,0 +1,1135 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="updatePreNegTemplate"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:p="http://schemas.uipath.com/workflow/activities/word"
+ xmlns:s="clr-namespace:System;assembly=mscorlib"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_data" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="in_config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="out_errorTable" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="in_SAMExpirationDate" Type="InArgument(x:String)" />
+    <x:Property Name="in_preNegFile" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>updatePreNegTemplate_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.Globalization</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Core</AssemblyReference>
+      <AssemblyReference>UiPath.Core.Activities</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Flowchart DisplayName="updatePreNegTemplate" sap2010:WorkflowViewState.IdRef="Flowchart_1">
+    <Flowchart.StartNode>
+      <FlowStep x:Name="__ReferenceID0" sap2010:WorkflowViewState.IdRef="FlowStep_1">
+        <Sequence DisplayName="Replace the placeholders in the Pre-Negotiation Memorandum template with the values extracted from the XML file and the SAM.gov website" sap2010:WorkflowViewState.IdRef="Sequence_15">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="x:Boolean" Name="outputDirExsits" />
+            <Variable x:TypeArguments="x:String" Name="preNegMemorandumFilename" />
+            <Variable x:TypeArguments="ui:GenericValue" Name="currentDirectory" />
+          </Sequence.Variables>
+          <Delay sap2010:Annotation.AnnotationText="This annotation is put in to make sure the template has completed the copy process before trying to open it.&#xA;&#xA;This was done becasue this is being done on a share drive." Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_1" />
+          <p:WordApplicationScope DisplayName="Word Application Scope" FilePath="[in_preNegFile]" sap2010:WorkflowViewState.IdRef="WordApplicationScope_1">
+            <p:WordApplicationScope.Body>
+              <ActivityAction x:TypeArguments="ui:WordDocument">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="ui:WordDocument" Name="WordDocumentScope" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="replace text in word doc" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="x:Int32" Name="estCost" />
+                    <Variable x:TypeArguments="x:Int32" Name="decimalLocation" />
+                    <Variable x:TypeArguments="x:String" Name="businessSize" />
+                    <Variable x:TypeArguments="sd:DataTable" Default="[new DataTable()]" Name="offerErrorTable" />
+                  </Sequence.Variables>
+                  <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Solicitation #" sap2010:WorkflowViewState.IdRef="WordReplaceText_1" Replace="[in_data(&quot;solicitNumber&quot;).ToString()]" Search="%[solicitation_number]" />
+                  <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Refresh #" sap2010:WorkflowViewState.IdRef="WordReplaceText_2" Replace="[in_data(&quot;refreshNumber&quot;).ToString()]" Search="%[refresh_number]" />
+                  <ui:LogMessage DisplayName="Log message" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;offer date: &quot;+in_data(&quot;offerDate&quot;).ToString()]" />
+                  <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Offer Date" sap2010:WorkflowViewState.IdRef="WordReplaceText_3" Replace="[Date.Parse(in_data(&quot;offerDate&quot;).ToString()).ToString(&quot;MMMM dd, yyyy&quot;)]" Search="%[offer_date]" />
+                  <Sequence DisplayName="replace business info" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                    <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_4" Replace="[in_data(&quot;companyName&quot;).ToString()]" Search="%[company_name]" />
+                    <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_5" Replace="[in_data(&quot;companyStreet&quot;).ToString()]" Search="%[business_street]" />
+                    <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_6" Replace="[in_data(&quot;companyCity&quot;).ToString()]" Search="%[business_city]" />
+                    <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_7" Replace="[in_data(&quot;companyState&quot;).ToString()]" Search="%[business_state]" />
+                    <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_9" Replace="[in_data(&quot;companySuite&quot;).ToString()]" Search="%[business_Suite]" />
+                    <ui:CommentOut DisplayName="Comment out" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+                      <ui:CommentOut.Body>
+                        <Sequence DisplayName="Ignored Activities" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                          <If Condition="[String.IsNullOrEmpty()]" DisplayName="Suite check" sap2010:WorkflowViewState.IdRef="If_2">
+                            <If.Then>
+                              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_8" Search="%[business_Suite]">
+                                <p:WordReplaceText.Replace>
+                                  <InArgument x:TypeArguments="x:String">
+                                    <Literal x:TypeArguments="x:String" Value="" />
+                                  </InArgument>
+                                </p:WordReplaceText.Replace>
+                              </p:WordReplaceText>
+                            </If.Then>
+                          </If>
+                        </Sequence>
+                      </ui:CommentOut.Body>
+                    </ui:CommentOut>
+                    <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_10" Replace="[in_data(&quot;companyZipCode&quot;).ToString()]" Search="%[business_zipcode]" />
+                    <TryCatch DisplayName="Try catch" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                      <TryCatch.Try>
+                        <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_11" Replace="[in_data(&quot;companyPhone&quot;).ToString()]" Search="%[business_phone]" />
+                      </TryCatch.Try>
+                      <TryCatch.Catches>
+                        <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                          <ActivityAction x:TypeArguments="s:Exception">
+                            <ActivityAction.Argument>
+                              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                            </ActivityAction.Argument>
+                            <ui:Comment sap2010:WorkflowViewState.IdRef="Comment_9" Text="The phone number is not currentley available, so this is a stop gap until it is added.&#xA;&#xA;This will be a no-op if it is not in the dictionary for look-up" />
+                          </ActivityAction>
+                        </Catch>
+                      </TryCatch.Catches>
+                    </TryCatch>
+                    <TryCatch DisplayName="Try catch" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+                      <TryCatch.Try>
+                        <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_12" Replace="[in_data(&quot;companyFax&quot;).ToString()]" Search="%[business_fax]" />
+                      </TryCatch.Try>
+                      <TryCatch.Catches>
+                        <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+                          <ActivityAction x:TypeArguments="s:Exception">
+                            <ActivityAction.Argument>
+                              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                            </ActivityAction.Argument>
+                            <ui:Comment sap2010:WorkflowViewState.IdRef="Comment_10" Text="The fax number is not currentley available, so this is a stop gap until it is added.&#xA;&#xA;This will be a no-op if it is not in the dictionary for look-up" />
+                          </ActivityAction>
+                        </Catch>
+                      </TryCatch.Catches>
+                    </TryCatch>
+                    <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_13" Replace="[in_data(&quot;dunsNumber&quot;).ToString()]" Search="%[duns_number]" />
+                    <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_14" Replace="[in_data(&quot;tin&quot;).ToString()]" Search="%[tin]" />
+                    <Assign sap2010:WorkflowViewState.IdRef="Assign_13">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[businessSize]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">[in_data("businessType").ToString()]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <If Condition="[String.IsNullOrEmpty(businessSize)]" DisplayName="check business size" sap2010:WorkflowViewState.IdRef="If_3">
+                      <If.Then>
+                        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_1">
+                          <ui:Comment sap2010:WorkflowViewState.IdRef="Comment_2" Text="// Add to review list for this document" />
+                          <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{in_data(&quot;companyName&quot;).ToString(), in_Data(&quot;DUNSNumber&quot;).ToString(), &quot; &quot;,&quot;Business Size&quot;}]" DataTable="[out_errorTable]" DisplayName="Add business size Error" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
+                          <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{in_data(&quot;companyName&quot;).ToString(), in_Data(&quot;DUNSNumber&quot;).ToString(), &quot; &quot;,&quot;Business Size&quot;}]" DataTable="[offerErrorTable]" DisplayName="Add business size Error" sap2010:WorkflowViewState.IdRef="AddDataRow_2" />
+                        </Sequence>
+                      </If.Then>
+                      <If.Else>
+                        <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_15" Replace="[businessSize]" Search="%[business_type]" />
+                      </If.Else>
+                    </If>
+                  </Sequence>
+                  <TryCatch sap2010:Annotation.AnnotationText="This is to amke sure the parent company was added to the dictionary, if not ignore and continue." DisplayName="Try catch" sap2010:WorkflowViewState.IdRef="TryCatch_3">
+                    <TryCatch.Try>
+                      <p:WordReplaceText Found="{x:Null}" DisplayName="Replace parent company" sap2010:WorkflowViewState.IdRef="WordReplaceText_17" Replace="[in_data(&quot;parentCompany&quot;).ToString()]" Search="%[parent_company]" />
+                    </TryCatch.Try>
+                    <TryCatch.Catches>
+                      <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_3">
+                        <ActivityAction x:TypeArguments="s:Exception">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                          </ActivityAction.Argument>
+                          <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_47" Search="%[parent_company]">
+                            <p:WordReplaceText.Replace>
+                              <InArgument x:TypeArguments="x:String">
+                                <Literal x:TypeArguments="x:String" Value="" />
+                              </InArgument>
+                            </p:WordReplaceText.Replace>
+                          </p:WordReplaceText>
+                        </ActivityAction>
+                      </Catch>
+                    </TryCatch.Catches>
+                  </TryCatch>
+                  <TryCatch DisplayName="were there exclusions?" sap2010:WorkflowViewState.IdRef="TryCatch_4">
+                    <TryCatch.Variables>
+                      <Variable x:TypeArguments="x:Object" Name="tempObj" />
+                    </TryCatch.Variables>
+                    <TryCatch.Try>
+                      <Sequence sap2010:WorkflowViewState.IdRef="Sequence_31">
+                        <Assign sap2010:WorkflowViewState.IdRef="Assign_19">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Object">[tempObj]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Object">[in_data("exclusionFound")]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <p:WordReplaceText Found="{x:Null}" sap2010:Annotation.AnnotationText="item in disctionary, so there were exclusions found." DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_57" Replace="X does [] does not" Search="%[on_excluded_list]" />
+                      </Sequence>
+                    </TryCatch.Try>
+                    <TryCatch.Catches>
+                      <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_4">
+                        <ActivityAction x:TypeArguments="s:Exception">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                          </ActivityAction.Argument>
+                          <p:WordReplaceText Found="{x:Null}" sap2010:Annotation.AnnotationText="item not in disctionary, so there were no exclusions found." DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_56" Replace="[] does X does not" Search="%[on_excluded_list]" />
+                        </ActivityAction>
+                      </Catch>
+                    </TryCatch.Catches>
+                  </TryCatch>
+                  <p:WordReplaceText Found="{x:Null}" sap2010:Annotation.AnnotationText="This should have been created as a comma seperated value in the read section" DisplayName="Replace NAICS" sap2010:WorkflowViewState.IdRef="WordReplaceText_18" Replace="[in_data(&quot;naicsCodes&quot;).ToString()]" Search="%[naics_code]" />
+                  <p:WordReplaceText Found="{x:Null}" sap2010:Annotation.AnnotationText="Est. value is sum of all * 5" DisplayName="Replace Est Value" sap2010:WorkflowViewState.IdRef="WordReplaceText_52" Replace="[FormatNumber(CDbl(Convert.ToDouble(in_data(&quot;estimatedSales&quot;).ToString()) * 5).ToString(), 2)]" Search="%[estimated_contract_value]" />
+                  <p:WordReplaceText Found="{x:Null}" sap2010:Annotation.AnnotationText="estimated sales times 20 (4 x 5 years)" DisplayName="Replace Period Value" sap2010:WorkflowViewState.IdRef="WordReplaceText_53" Replace="[FormatNumber(CDbl(Convert.ToDouble(in_data(&quot;estimatedSales&quot;).ToString()) * 20).ToString(), 2)]" Search="%[base_period_options_value]" />
+                  <If Condition="[Convert.ToDouble(in_data(&quot;estimatedSales&quot;).ToString()) &gt; 10000000]" DisplayName="EEO check" sap2010:WorkflowViewState.IdRef="If_18">
+                    <If.Then>
+                      <p:WordReplaceText Found="{x:Null}" DisplayName="Replace EEO" sap2010:WorkflowViewState.IdRef="WordReplaceText_50" Replace="[ ] N/A  X Required" Search="%[eeo_clr]" />
+                    </If.Then>
+                    <If.Else>
+                      <p:WordReplaceText Found="{x:Null}" DisplayName="Replace EEO" sap2010:WorkflowViewState.IdRef="WordReplaceText_51" Replace="X N/A [ ] Required" Search="%[eeo_clr]" />
+                    </If.Else>
+                  </If>
+                  <Sequence DisplayName="replace SIN info" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                    <ui:ForEach x:TypeArguments="x:Object" DisplayName="prep negostiator for replace" sap2010:WorkflowViewState.IdRef="ForEach`1_4" Values="[tryCast(in_data(&quot;sinInfo&quot;),List(of String))]">
+                      <ui:ForEach.Body>
+                        <ActivityAction x:TypeArguments="x:Object">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="x:Object" Name="item" />
+                          </ActivityAction.Argument>
+                          <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                            <If Condition="[item.ToString.Length &gt;= 250]" DisplayName="check negotiator string length" sap2010:WorkflowViewState.IdRef="If_9">
+                              <If.Then>
+                                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke workflow file" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="WordReplaceLargeText.xaml">
+                                  <ui:InvokeWorkflowFile.Arguments>
+                                    <InArgument x:TypeArguments="x:String" x:Key="PatternToReplace">%[Sin_info]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="ReplacementText">[item.ToString+Environment.NewLine +"[SIN_info]"]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="WordDocumentPath">[in_preNegFile]</InArgument>
+                                  </ui:InvokeWorkflowFile.Arguments>
+                                </ui:InvokeWorkflowFile>
+                              </If.Then>
+                              <If.Else>
+                                <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_29" Replace="[item.toString+Environment.NewLine +&quot;[SIN_info]&quot;]" Search="%[Sin_info]" />
+                              </If.Else>
+                            </If>
+                          </Sequence>
+                        </ActivityAction>
+                      </ui:ForEach.Body>
+                    </ui:ForEach>
+                    <ui:Comment sap2010:WorkflowViewState.IdRef="Comment_6" Text="// remove the last replacement characters" />
+                    <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_30" Search="%[Sin_info]">
+                      <p:WordReplaceText.Replace>
+                        <InArgument x:TypeArguments="x:String">
+                          <Literal x:TypeArguments="x:String" Value="" />
+                        </InArgument>
+                      </p:WordReplaceText.Replace>
+                    </p:WordReplaceText>
+                  </Sequence>
+                  <Sequence DisplayName="replace IFF admin" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="scg:List(x:String)" Name="contactAdmins" />
+                    </Sequence.Variables>
+                    <Assign DisplayName="get list of IFF" sap2010:WorkflowViewState.IdRef="Assign_14">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="scg:List(x:String)">[contactAdmins]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="scg:List(x:String)">[tryCast(in_data("iffAdmins"),List(of String))]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <ui:ForEach x:TypeArguments="x:Object" DisplayName="prep IFF for replace" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[contactAdmins]">
+                      <ui:ForEach.Body>
+                        <ActivityAction x:TypeArguments="x:Object">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="x:Object" Name="item" />
+                          </ActivityAction.Argument>
+                          <Sequence DisplayName="IFF replace" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                            <Sequence.Variables>
+                              <Variable x:TypeArguments="x:String" Name="person" />
+                            </Sequence.Variables>
+                            <Assign sap2010:WorkflowViewState.IdRef="Assign_6">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:String">[person]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:String">[item.ToString+Environment.NewLine +"[admin_contract_contact]"]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                            <If Condition="[item.ToString.Length &gt;= 250]" DisplayName="check string length" sap2010:WorkflowViewState.IdRef="If_6">
+                              <If.Then>
+                                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke workflow file" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="WordReplaceLargeText.xaml">
+                                  <ui:InvokeWorkflowFile.Arguments>
+                                    <InArgument x:TypeArguments="x:String" x:Key="PatternToReplace">%[admin_contract_contact]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="ReplacementText">[person]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="WordDocumentPath">[in_preNegFile]</InArgument>
+                                  </ui:InvokeWorkflowFile.Arguments>
+                                </ui:InvokeWorkflowFile>
+                              </If.Then>
+                              <If.Else>
+                                <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_21" Replace="[person]" Search="iff_administrators]" />
+                              </If.Else>
+                            </If>
+                          </Sequence>
+                        </ActivityAction>
+                      </ui:ForEach.Body>
+                    </ui:ForEach>
+                    <ui:Comment sap2010:WorkflowViewState.IdRef="Comment_13" Text="// remove the last replacement characters" />
+                    <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_58" Search="%[admin_contract_contact]">
+                      <p:WordReplaceText.Replace>
+                        <InArgument x:TypeArguments="x:String">
+                          <Literal x:TypeArguments="x:String" Value="" />
+                        </InArgument>
+                      </p:WordReplaceText.Replace>
+                    </p:WordReplaceText>
+                  </Sequence>
+                  <Sequence DisplayName="replace contract admin" sap2010:WorkflowViewState.IdRef="Sequence_25">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="scg:List(x:String)" Name="contactAdmins" />
+                    </Sequence.Variables>
+                    <Assign sap2010:WorkflowViewState.IdRef="Assign_16">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="scg:List(x:String)">[contactAdmins]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="scg:List(x:String)">[tryCast(in_data("contactForContractInfo"),List(of String))]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <ui:ForEach x:TypeArguments="x:Object" DisplayName="prep Admin for replace" sap2010:WorkflowViewState.IdRef="ForEach`1_5" Values="[contactAdmins]">
+                      <ui:ForEach.Body>
+                        <ActivityAction x:TypeArguments="x:Object">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="x:Object" Name="item" />
+                          </ActivityAction.Argument>
+                          <Sequence DisplayName="admin replace" sap2010:WorkflowViewState.IdRef="Sequence_24">
+                            <Sequence.Variables>
+                              <Variable x:TypeArguments="x:String" Name="person" />
+                            </Sequence.Variables>
+                            <Assign sap2010:WorkflowViewState.IdRef="Assign_17">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:String">[person]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:String">[item.ToString+Environment.NewLine +"[admin_contract_contact]"]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                            <If Condition="[item.ToString.Length &gt;= 250]" DisplayName="check string length" sap2010:WorkflowViewState.IdRef="If_17">
+                              <If.Then>
+                                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke workflow file" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="WordReplaceLargeText.xaml">
+                                  <ui:InvokeWorkflowFile.Arguments>
+                                    <InArgument x:TypeArguments="x:String" x:Key="PatternToReplace">%[admin_contract_contact]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="ReplacementText">[person]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="WordDocumentPath">[in_preNegFile]</InArgument>
+                                  </ui:InvokeWorkflowFile.Arguments>
+                                </ui:InvokeWorkflowFile>
+                              </If.Then>
+                              <If.Else>
+                                <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_48" Replace="[person + System.Environment.NewLine + &quot;[admin+contact+contract]&quot;]" Search="%[admin_contract_contact]" />
+                              </If.Else>
+                            </If>
+                          </Sequence>
+                        </ActivityAction>
+                      </ui:ForEach.Body>
+                    </ui:ForEach>
+                    <ui:Comment sap2010:WorkflowViewState.IdRef="Comment_12" Text="// remove the last replacement characters" />
+                    <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_49" Search="%[admin_contract_contact]">
+                      <p:WordReplaceText.Replace>
+                        <InArgument x:TypeArguments="x:String">
+                          <Literal x:TypeArguments="x:String" Value="" />
+                        </InArgument>
+                      </p:WordReplaceText.Replace>
+                    </p:WordReplaceText>
+                  </Sequence>
+                  <ui:ForEach x:TypeArguments="x:Object" DisplayName="prep Negotiators for replace" sap2010:WorkflowViewState.IdRef="ForEach`1_6" Values="[tryCast(in_data(&quot;negotiatorInfo&quot;),List(of String))]">
+                    <ui:ForEach.Body>
+                      <ActivityAction x:TypeArguments="x:Object">
+                        <ActivityAction.Argument>
+                          <DelegateInArgument x:TypeArguments="x:Object" Name="person" />
+                        </ActivityAction.Argument>
+                        <Sequence DisplayName="negaotiator replace" sap2010:WorkflowViewState.IdRef="Sequence_28">
+                          <If Condition="[person.ToString.Length &gt;= 255]" DisplayName="check negotiator string length" sap2010:WorkflowViewState.IdRef="If_19">
+                            <If.Then>
+                              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke workflow file" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="WordReplaceLargeText.xaml">
+                                <ui:InvokeWorkflowFile.Arguments>
+                                  <InArgument x:TypeArguments="x:String" x:Key="PatternToReplace">[negotiator_administrators], [negotiator_title], authorized to Negotiate on behalf of contractor.</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="ReplacementText">[person.ToString()]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="WordDocumentPath">[in_preNegFile]</InArgument>
+                                </ui:InvokeWorkflowFile.Arguments>
+                              </ui:InvokeWorkflowFile>
+                            </If.Then>
+                            <If.Else>
+                              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_54" Replace="[person.ToString()]" Search="[negotiator_administrators], [negotiator_title], authorized to Negotiate on behalf of contractor." />
+                            </If.Else>
+                          </If>
+                        </Sequence>
+                      </ActivityAction>
+                    </ui:ForEach.Body>
+                  </ui:ForEach>
+                  <Sequence DisplayName="replace negotiator" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="x:String" Name="person" />
+                      <Variable x:TypeArguments="scg:List(x:String)" Name="negotiatorList" />
+                    </Sequence.Variables>
+                    <ui:ForEach x:TypeArguments="x:Object" DisplayName="prep Negotiators for replace" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[tryCast(in_data(&quot;negotiatorInfo&quot;),List(of String))]">
+                      <ui:ForEach.Body>
+                        <ActivityAction x:TypeArguments="x:Object">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="x:Object" Name="item" />
+                          </ActivityAction.Argument>
+                          <Sequence DisplayName="negaotiator replace" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                            <Assign sap2010:WorkflowViewState.IdRef="Assign_7">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:String">[person]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:String">[person + Environment.NewLine + item.ToString+Environment.NewLine]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                            <If Condition="[person.ToString.Length &gt;= 255]" DisplayName="check negotiator string length" sap2010:WorkflowViewState.IdRef="If_7">
+                              <If.Then>
+                                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke workflow file" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="WordReplaceLargeText.xaml">
+                                  <ui:InvokeWorkflowFile.Arguments>
+                                    <InArgument x:TypeArguments="x:String" x:Key="PatternToReplace">[negotiator_administrators], [negotiator_title], authorized to Negotiate on behalf of contractor.</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="ReplacementText">[person]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="WordDocumentPath">[in_preNegFile]</InArgument>
+                                  </ui:InvokeWorkflowFile.Arguments>
+                                </ui:InvokeWorkflowFile>
+                              </If.Then>
+                              <If.Else>
+                                <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_23" Replace="[person]" Search="[negotiator_administrators], [negotiator_title], authorized to Negotiate on behalf of contractor." />
+                              </If.Else>
+                            </If>
+                          </Sequence>
+                        </ActivityAction>
+                      </ui:ForEach.Body>
+                    </ui:ForEach>
+                    <ui:CommentOut DisplayName="Comment out" sap2010:WorkflowViewState.IdRef="CommentOut_12">
+                      <ui:CommentOut.Body>
+                        <Sequence DisplayName="Ignored Activities" sap2010:WorkflowViewState.IdRef="Sequence_29">
+                          <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Scope" sap2010:WorkflowViewState.IdRef="WordReplaceText_25" Replace="[in_data(&quot;scopeOfContract&quot;).ToString()]" Search="%[scope_of_contract]" />
+                          <Assign sap2010:WorkflowViewState.IdRef="Assign_8">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[completionDate]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">[completionMonth+"/"+completionDay + "/" + completionYear]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <ui:LogMessage DisplayName="Log Message" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Trace" Message="[&quot;pathwayCertInfo: &quot;+pathwayCertInfo]" />
+                          <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_27" Replace="[Date.Parse(completionDate).ToString(&quot;MMMM dd, yyyy&quot;)]" Search="%[completion_date]" />
+                          <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_31" Replace="[pathwayCertInfo]" Search="%[Pathway_completed_by_date]" />
+                        </Sequence>
+                      </ui:CommentOut.Body>
+                    </ui:CommentOut>
+                  </Sequence>
+                  <p:WordReplaceText Found="{x:Null}" DisplayName="Replace sub contracting plan" sap2010:WorkflowViewState.IdRef="WordReplaceText_32" Replace="[in_data(&quot;subContractingPlan&quot;).ToString()]" Search="%[subcontracting_plan]" />
+                  <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Disaster recovery" sap2010:WorkflowViewState.IdRef="WordReplaceText_55" Replace="[in_data(&quot;disasterRecovery&quot;).ToString()]" Search="%[diasasterRecovery_value]" />
+                  <If Condition="[String.IsNullOrEmpty(in_data(&quot;samExperation&quot;).ToString())]" DisplayName="check expire date" sap2010:WorkflowViewState.IdRef="If_8">
+                    <If.Then>
+                      <Sequence sap2010:WorkflowViewState.IdRef="Sequence_8">
+                        <ui:Comment sap2010:WorkflowViewState.IdRef="Comment_4" Text="// Add to review list for this document" />
+                        <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{in_data(&quot;companyName&quot;).ToString(), in_data(&quot;DUNSNumber&quot;).ToString(), &quot; &quot;,&quot;SAM Expiration Date&quot;}]" DataTable="[out_errorTable]" DisplayName="Add Sam date Error" sap2010:WorkflowViewState.IdRef="AddDataRow_3" />
+                        <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{in_data(&quot;companyName&quot;).ToString(), in_data(&quot;DUNSNumber&quot;).ToString(), &quot; &quot;,&quot;SAM Expiration Date&quot;}]" DataTable="[offerErrorTable]" DisplayName="Add Sam date Error" sap2010:WorkflowViewState.IdRef="AddDataRow_4" />
+                      </Sequence>
+                    </If.Then>
+                    <If.Else>
+                      <p:WordReplaceText Found="{x:Null}" DisplayName="Replace expire Date" sap2010:WorkflowViewState.IdRef="WordReplaceText_26" Replace="[Date.ParseExact(in_data(&quot;samExperation&quot;).ToString(),&quot;yyyy-MM-dd&quot;,System.Globalization.CultureInfo.CurrentCulture).ToString(&quot;MMMM dd, yyyy&quot;)]" Search="%[expiration_date]" />
+                    </If.Else>
+                  </If>
+                  <If Condition="[in_data(&quot;disasterRecovery&quot;).ToString() = &quot;Yes&quot;]" DisplayName="If recovery purchase" sap2010:WorkflowViewState.IdRef="If_11">
+                    <If.Then>
+                      <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_35" Replace="X Yes   [ ] No" Search="%[recovery_purchase]" />
+                    </If.Then>
+                    <If.Else>
+                      <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_36" Replace="[ ] Yes   X No" Search="%[recovery_purchase]" />
+                    </If.Else>
+                  </If>
+                  <ui:CommentOut DisplayName="Comment out" sap2010:WorkflowViewState.IdRef="CommentOut_7">
+                    <ui:CommentOut.Body>
+                      <Sequence DisplayName="Ignored Activities" sap2010:WorkflowViewState.IdRef="Sequence_21">
+                        <Sequence DisplayName="check cooperative purchase" sap2010:WorkflowViewState.IdRef="Sequence_12">
+                          <If Condition="[coopPurchase = &quot;True&quot;]" DisplayName="If  cooperative purchase yes" sap2010:WorkflowViewState.IdRef="If_12">
+                            <If.Then>
+                              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_37" Replace="? N/A  X Yes   ? No" Search="%[cooperative_purchase]" />
+                            </If.Then>
+                          </If>
+                          <If Condition="[coopPurchase = &quot;False&quot;]" DisplayName="If  cooperative purchase no" sap2010:WorkflowViewState.IdRef="If_13">
+                            <If.Then>
+                              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_38" Replace="? N/A ? Yes   X No" Search="%[cooperative_purchase]" />
+                            </If.Then>
+                          </If>
+                          <If Condition="[coopPurchase = &quot;NA&quot;]" DisplayName="If  cooperative purchase NA" sap2010:WorkflowViewState.IdRef="If_14">
+                            <If.Then>
+                              <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_39" Replace="X N/A ? Yes  ? No" Search="%[cooperative_purchase]" />
+                            </If.Then>
+                          </If>
+                        </Sequence>
+                        <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_43" Replace="[exceptionsToTermsAndConditions]" Search="%[exceptionsTerms_value]" />
+                        <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_44" Replace="[subKplan]" Search="%[SubKContractingPlan]" />
+                        <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_45" Replace="[disasterRecoverPurchase]" Search="%[diasasterRecovery_value]" />
+                      </Sequence>
+                    </ui:CommentOut.Body>
+                  </ui:CommentOut>
+                  <p:WordReplaceText Found="{x:Null}" DisplayName="Replace min order" sap2010:WorkflowViewState.IdRef="WordReplaceText_46" Replace="[in_data(&quot;minimumOrderLimit&quot;).ToString()]" Search="%[minimum_limit_value]" />
+                  <If Condition="[estCost &gt; 10000000]" DisplayName="EEO check" sap2010:WorkflowViewState.IdRef="If_10">
+                    <If.Then>
+                      <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_33" Replace="[ ] N/A  X Required" Search="%[eeo_clr]" />
+                    </If.Then>
+                    <If.Else>
+                      <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap2010:WorkflowViewState.IdRef="WordReplaceText_34" Replace="X N/A [ ] Required" Search="%[eeo_clr]" />
+                    </If.Else>
+                  </If>
+                  <p:WordReplaceText Found="{x:Null}" DisplayName="Replace exclusion date" sap2010:WorkflowViewState.IdRef="WordReplaceText_40" Replace="[Now.ToString(&quot;MMMM dd, yyyy&quot;)]" Search="%[exclusion_check_date]" />
+                  <Sequence DisplayName="write error table to end of Word Doc" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                    <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Send Hotkey" EmptyField="False" sap2010:WorkflowViewState.IdRef="SendHotkey_1" Key="end" KeyModifiers="Ctrl" SendWindowMessages="False" SpecialKey="True">
+                      <ui:SendHotkey.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" WaitForReady="INTERACTIVE" />
+                      </ui:SendHotkey.Target>
+                    </ui:SendHotkey>
+                    <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" Activate="True" ClickBeforeTyping="False" DelayMS="2000" DisplayName="Send Hotkey" EmptyField="False" sap2010:WorkflowViewState.IdRef="SendHotkey_2" Key="nb" KeyModifiers="Alt" SendWindowMessages="False" SpecialKey="False">
+                      <ui:SendHotkey.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" WaitForReady="INTERACTIVE" />
+                      </ui:SendHotkey.Target>
+                    </ui:SendHotkey>
+                    <ui:CommentOut sap2010:Annotation.AnnotationText="" DisplayName="TO DO" sap2010:WorkflowViewState.IdRef="CommentOut_9">
+                      <ui:CommentOut.Body>
+                        <Sequence DisplayName="Ignored Activities" sap2010:WorkflowViewState.IdRef="Sequence_23">
+                          <p:WordInsertDataTable Bookmark="{x:Null}" OccurrenceIndex="{x:Null}" Text="{x:Null}" DataTable="[offerErrorTable]" DisplayName="Insert DataTable" sap2010:WorkflowViewState.IdRef="WordInsertDataTable_1" Position="End" />
+                        </Sequence>
+                      </ui:CommentOut.Body>
+                    </ui:CommentOut>
+                  </Sequence>
+                </Sequence>
+              </ActivityAction>
+            </p:WordApplicationScope.Body>
+          </p:WordApplicationScope>
+        </Sequence>
+      </FlowStep>
+    </Flowchart.StartNode>
+    <x:Reference>__ReferenceID0</x:Reference>
+    <sads:DebugSymbol.Symbol>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</sads:DebugSymbol.Symbol>
+  </Flowchart>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="Delay_1" sap:VirtualizedContainerService.HintSize="787,139">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WordReplaceText_1" sap:VirtualizedContainerService.HintSize="675,59" />
+      <sap2010:ViewStateData Id="WordReplaceText_2" sap:VirtualizedContainerService.HintSize="675,59" />
+      <sap2010:ViewStateData Id="LogMessage_3" sap:VirtualizedContainerService.HintSize="675,91" />
+      <sap2010:ViewStateData Id="WordReplaceText_3" sap:VirtualizedContainerService.HintSize="675,59" />
+      <sap2010:ViewStateData Id="WordReplaceText_4" sap:VirtualizedContainerService.HintSize="675,59" />
+      <sap2010:ViewStateData Id="WordReplaceText_5" sap:VirtualizedContainerService.HintSize="675,59" />
+      <sap2010:ViewStateData Id="WordReplaceText_6" sap:VirtualizedContainerService.HintSize="675,59" />
+      <sap2010:ViewStateData Id="WordReplaceText_7" sap:VirtualizedContainerService.HintSize="675,59" />
+      <sap2010:ViewStateData Id="WordReplaceText_9" sap:VirtualizedContainerService.HintSize="675,59" />
+      <sap2010:ViewStateData Id="WordReplaceText_8" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="If_2" sap:VirtualizedContainerService.HintSize="464,207">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_16" sap:VirtualizedContainerService.HintSize="486,331">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="CommentOut_2" sap:VirtualizedContainerService.HintSize="675,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WordReplaceText_10" sap:VirtualizedContainerService.HintSize="675,59" />
+      <sap2010:ViewStateData Id="WordReplaceText_11" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="Comment_9" sap:VirtualizedContainerService.HintSize="314,132" />
+      <sap2010:ViewStateData Id="Catch`1_1" sap:VirtualizedContainerService.HintSize="404,21">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="TryCatch_1" sap:VirtualizedContainerService.HintSize="675,287" />
+      <sap2010:ViewStateData Id="WordReplaceText_12" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="Comment_10" sap:VirtualizedContainerService.HintSize="314,132" />
+      <sap2010:ViewStateData Id="Catch`1_2" sap:VirtualizedContainerService.HintSize="404,21">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="TryCatch_2" sap:VirtualizedContainerService.HintSize="675,287" />
+      <sap2010:ViewStateData Id="WordReplaceText_13" sap:VirtualizedContainerService.HintSize="675,59" />
+      <sap2010:ViewStateData Id="WordReplaceText_14" sap:VirtualizedContainerService.HintSize="675,59" />
+      <sap2010:ViewStateData Id="Assign_13" sap:VirtualizedContainerService.HintSize="675,60" />
+      <sap2010:ViewStateData Id="Comment_2" sap:VirtualizedContainerService.HintSize="314,55" />
+      <sap2010:ViewStateData Id="AddDataRow_1" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="AddDataRow_2" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="336,303">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WordReplaceText_15" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="If_3" sap:VirtualizedContainerService.HintSize="675,451">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="675,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WordReplaceText_17" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="WordReplaceText_47" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="Catch`1_3" sap:VirtualizedContainerService.HintSize="404,21">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="TryCatch_3" sap:VirtualizedContainerService.HintSize="675,329">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_19" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="WordReplaceText_57" sap:VirtualizedContainerService.HintSize="314,86">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_31" sap:VirtualizedContainerService.HintSize="336,310">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WordReplaceText_56" sap:VirtualizedContainerService.HintSize="314,101">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Catch`1_4" sap:VirtualizedContainerService.HintSize="404,21">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="TryCatch_4" sap:VirtualizedContainerService.HintSize="675,537" />
+      <sap2010:ViewStateData Id="WordReplaceText_18" sap:VirtualizedContainerService.HintSize="675,101">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WordReplaceText_52" sap:VirtualizedContainerService.HintSize="675,86">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WordReplaceText_53" sap:VirtualizedContainerService.HintSize="675,86">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WordReplaceText_50" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="WordReplaceText_51" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="If_18" sap:VirtualizedContainerService.HintSize="675,208">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_3" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="WordReplaceText_29" sap:VirtualizedContainerService.HintSize="314,59">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_9" sap:VirtualizedContainerService.HintSize="653,235">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_10" sap:VirtualizedContainerService.HintSize="675,359">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_4" sap:VirtualizedContainerService.HintSize="691,493">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Comment_6" sap:VirtualizedContainerService.HintSize="691,55" />
+      <sap2010:ViewStateData Id="WordReplaceText_30" sap:VirtualizedContainerService.HintSize="691,59" />
+      <sap2010:ViewStateData Id="Sequence_11" sap:VirtualizedContainerService.HintSize="675,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_14" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Assign_6" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_1" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="WordReplaceText_21" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="If_6" sap:VirtualizedContainerService.HintSize="242,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="264,275">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_2" sap:VirtualizedContainerService.HintSize="314,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Comment_13" sap:VirtualizedContainerService.HintSize="314,55" />
+      <sap2010:ViewStateData Id="WordReplaceText_58" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="675,469">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_16" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Assign_17" sap:VirtualizedContainerService.HintSize="653,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_4" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="WordReplaceText_48" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="If_17" sap:VirtualizedContainerService.HintSize="653,235" />
+      <sap2010:ViewStateData Id="Sequence_24" sap:VirtualizedContainerService.HintSize="675,459">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_5" sap:VirtualizedContainerService.HintSize="314,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Comment_12" sap:VirtualizedContainerService.HintSize="314,55" />
+      <sap2010:ViewStateData Id="WordReplaceText_49" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="Sequence_25" sap:VirtualizedContainerService.HintSize="675,469">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_5" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="WordReplaceText_54" sap:VirtualizedContainerService.HintSize="314,59">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_19" sap:VirtualizedContainerService.HintSize="653,235">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_28" sap:VirtualizedContainerService.HintSize="675,359">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_6" sap:VirtualizedContainerService.HintSize="675,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_7" sap:VirtualizedContainerService.HintSize="653,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_2" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="WordReplaceText_23" sap:VirtualizedContainerService.HintSize="314,59">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_7" sap:VirtualizedContainerService.HintSize="653,234">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_6" sap:VirtualizedContainerService.HintSize="675,458">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_3" sap:VirtualizedContainerService.HintSize="691,592">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WordReplaceText_25" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="Assign_8" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="LogMessage_4" sap:VirtualizedContainerService.HintSize="314,91" />
+      <sap2010:ViewStateData Id="WordReplaceText_27" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="WordReplaceText_31" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="Sequence_29" sap:VirtualizedContainerService.HintSize="336,612">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="CommentOut_12" sap:VirtualizedContainerService.HintSize="691,690" />
+      <sap2010:ViewStateData Id="Sequence_7" sap:VirtualizedContainerService.HintSize="675,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WordReplaceText_32" sap:VirtualizedContainerService.HintSize="675,59" />
+      <sap2010:ViewStateData Id="WordReplaceText_55" sap:VirtualizedContainerService.HintSize="675,59" />
+      <sap2010:ViewStateData Id="Comment_4" sap:VirtualizedContainerService.HintSize="314,55" />
+      <sap2010:ViewStateData Id="AddDataRow_3" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="AddDataRow_4" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="Sequence_8" sap:VirtualizedContainerService.HintSize="336,303">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WordReplaceText_26" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="If_8" sap:VirtualizedContainerService.HintSize="675,451">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WordReplaceText_35" sap:VirtualizedContainerService.HintSize="314,59">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WordReplaceText_36" sap:VirtualizedContainerService.HintSize="314,59">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_11" sap:VirtualizedContainerService.HintSize="675,208">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WordReplaceText_37" sap:VirtualizedContainerService.HintSize="314,59">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_12" sap:VirtualizedContainerService.HintSize="464,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WordReplaceText_38" sap:VirtualizedContainerService.HintSize="314,59">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_13" sap:VirtualizedContainerService.HintSize="464,207">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WordReplaceText_39" sap:VirtualizedContainerService.HintSize="314,59">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_14" sap:VirtualizedContainerService.HintSize="464,207">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_12" sap:VirtualizedContainerService.HintSize="314,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WordReplaceText_43" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="WordReplaceText_44" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="WordReplaceText_45" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="Sequence_21" sap:VirtualizedContainerService.HintSize="336,472">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="CommentOut_7" sap:VirtualizedContainerService.HintSize="675,550">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WordReplaceText_46" sap:VirtualizedContainerService.HintSize="675,59" />
+      <sap2010:ViewStateData Id="WordReplaceText_33" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="WordReplaceText_34" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="If_10" sap:VirtualizedContainerService.HintSize="675,208">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WordReplaceText_40" sap:VirtualizedContainerService.HintSize="675,59">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SendHotkey_1" sap:VirtualizedContainerService.HintSize="416,116" />
+      <sap2010:ViewStateData Id="SendHotkey_2" sap:VirtualizedContainerService.HintSize="416,116" />
+      <sap2010:ViewStateData Id="WordInsertDataTable_1" sap:VirtualizedContainerService.HintSize="314,66" />
+      <sap2010:ViewStateData Id="Sequence_23" sap:VirtualizedContainerService.HintSize="336,190">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="CommentOut_9" sap:VirtualizedContainerService.HintSize="416,295">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_13" sap:VirtualizedContainerService.HintSize="675,731">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_14" sap:VirtualizedContainerService.HintSize="697,6225">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WordApplicationScope_1" sap:VirtualizedContainerService.HintSize="787,7069">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_15" sap:VirtualizedContainerService.HintSize="809,7372">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">200,127.5</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Flowchart_1" sap:VirtualizedContainerService.HintSize="614,636">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <av:Point x:Key="ShapeLocation">270,2.5</av:Point>
+            <av:Size x:Key="ShapeSize">60,75</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">300,77.5 300,127.5</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="updatePreNegTemplate_1" sap:VirtualizedContainerService.HintSize="654,716" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>
