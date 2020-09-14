@@ -1,0 +1,1409 @@
+"sam_data": {
+  "registration": {
+    "pastPerformancePoc": {
+      "firstName": "SHEILA",
+      "lastName": "DUFFY",
+      "address": {
+        "zip": "20003",
+        "city": "Washington",
+        "countryCode": "USA",
+        "stateorProvince": "DC",
+        "line2": "Suite 120",
+        "line1": "1201 M Street SE"
+      },
+      "title": "CEO",
+      "usPhone": "2026448998",
+      "email": "SDUFFY@GREYSTONESGROUP.COM"
+    },
+    "lastUpdateDate": "2019-05-31 16:00:24.9",
+    "businessStartDate": "1999-09-30",
+    "congressionalDistrict": "DC 98",
+    "corporateUrl": "http://www.greystonesgroup.com",
+    "samAddress": {
+      "zip": "20003",
+      "city": "Washington",
+      "countryCode": "USA",
+      "stateorProvince": "DC",
+      "line1": "1201 M St SE Ste 120",
+      "zipPlus4": "3711"
+    },
+    "electronicBusinessPoc": {
+      "firstName": "SHEILA",
+      "lastName": "DUFFY",
+      "address": {
+        "zip": "20003",
+        "city": "Washington",
+        "countryCode": "USA",
+        "stateorProvince": "DC",
+        "line2": "Suite 120",
+        "line1": "1201 M Street SE"
+      },
+      "title": "CEO",
+      "usPhone": "2026448998",
+      "email": "SDUFFY@GREYSTONESGROUP.COM"
+    },
+    "corporateStructureCode": "2L",
+    "certificationsURL": {
+      "pdfUrl": "https://sam.gov/SAM/filedownload?reportType=2&orgId=%2Fs7izqCgfuAP55WaIAl6SoOhszbXsv0uJPat9UrlXBFf%2BD5J%2Bzt%2FVeKz1%2FDsRfEl&pitId=Ds8rJW2xEiQPfC%2BVhZTaSyoEtoGEzevQA%2BoNIlfXms9qJ14%2FPRIyaDQZ4mwghYEy%2Fox%2B%2BSqr95Un%0AdLh%2FyV4LHw%3D%3D&requestId=5Nyt69kHeb03N4X"
+    },
+    "bondingInformation": {},
+    "dunsPlus4": "0000",
+    "debtSubjectToOffset": false,
+    "qualifications": {
+      "acass": {
+        "answers": {
+          "answerText": "No",
+          "section": "SF330.1"
+        },
+        "id": "SF330"
+      }
+    },
+    "cage": "31RQ4",
+    "fiscalYearEndCloseDate": "12/31",
+    "publicDisplay": true,
+    "altGovtBusinessPoc": {
+      "firstName": "NAV",
+      "lastName": "MUTHU",
+      "address": {
+        "zip": "20003",
+        "city": "Washington",
+        "countryCode": "USA",
+        "stateorProvince": "DC",
+        "line2": "Suite 120",
+        "line1": "1201 M Street SE"
+      },
+      "title": "COO",
+      "usPhone": "2026448998",
+      "email": "NMUTHU@GREYSTONESGROUP.COM"
+    },
+    "registrationDate": "2004-09-21 00:00:00.0",
+    "govtBusinessPoc": {
+      "firstName": "SHEILA",
+      "lastName": "DUFFY",
+      "address": {
+        "zip": "20003",
+        "city": "Washington",
+        "countryCode": "USA",
+        "stateorProvince": "DC",
+        "line2": "Suite 120",
+        "line1": "1201 M Street SE"
+      },
+      "title": "CEO",
+      "usPhone": "2026448998",
+      "email": "SDUFFY@GREYSTONESGROUP.COM"
+    },
+    "expirationDate": "2020-05-30 15:34:20.0",
+    "altElectronicBusinessPoc": {
+      "firstName": "WILLIAM",
+      "lastName": "MARKER",
+      "address": {
+        "zip": "20003",
+        "city": "Washington",
+        "countryCode": "USA",
+        "stateorProvince": "DC",
+        "line2": "Suite 120",
+        "line1": "1201 M Street SE"
+      },
+      "usPhone": "2026448998",
+      "email": "WMARKER@GREYSTONESGROUP.COM"
+    },
+    "purposeOfRegistration": "ALL_AWARDS",
+    "financialAssistanceResponse": "No",
+    "submissionDate": "2019-05-31 15:45:45.9",
+    "creditCardUsage": true,
+    "countryOfIncorporation": "USA",
+    "businessTypes": [
+      "27",
+      "2X",
+      "8E",
+      "8W",
+      "A2",
+      "LJ"
+    ],
+    "certifications": {
+      "pdfUrl": "https://sam.gov/SAM/filedownload?reportType=2&orgId=ODb5ilSagkGw%2Bjm%2BHhkzQVvwjfSsiYmGVWfbLJOk3dirBHfkA9kBec3dShenOBhw&pitId=VDNO20IfY8v6uiZoUJfLKUWH4O%2BXGJLKJDT8lEL4EsTsSiFih2wLkYKKBhUKRySrZ3xvQgY33TPi%0AMDAkqWPfIw%3D%3D&requestId=1Bf2z91iNX1ejBS",
+      "farResponses": [
+        {
+          "answers": [
+            {
+              "answerText": "No",
+              "section": "52.209-2.c.1"
+            },
+            {
+              "answerText": "No",
+              "section": "52.209-2.c.2"
+            }
+          ],
+          "id": "FAR 52.209-2"
+        },
+        {
+          "answers": [
+            {
+              "answerText": "No",
+              "section": "52.209-5.a.1.i.A"
+            },
+            {
+              "answerText": "No",
+              "section": "52.209-5.a.1.i.B"
+            },
+            {
+              "answerText": "No",
+              "section": "52.209-5.a.1.i.D"
+            },
+            {
+              "answerText": "No",
+              "section": "52.209-5.a.1.i.C"
+            },
+            {
+              "answerText": "No",
+              "section": "52.209-5.a.1.ii"
+            }
+          ],
+          "id": "FAR 52.209-5"
+        },
+        {
+          "answers": {
+            "SamPointOfContact": {
+              "firstName": "Sheila",
+              "lastName": "Duffy",
+              "title": "Founder and CEO"
+            },
+            "section": "52.203-2.b.2.i"
+          },
+          "id": "FAR 52.203-2"
+        },
+        {
+          "answers": {
+            "answerText": "No",
+            "section": "52.215-6.a"
+          },
+          "id": "FAR 52.215-6"
+        },
+        {
+          "answers": {
+            "answerText": "No",
+            "section": "52.214-14.a"
+          },
+          "id": "FAR 52.214-14"
+        },
+        {
+          "answers": {
+            "answerText": "Yes",
+            "section": "52.223-4"
+          },
+          "id": "FAR 52.223-4"
+        },
+        {
+          "answers": {
+            "answerText": "Yes",
+            "section": "52.223-9"
+          },
+          "id": "FAR 52.223-9"
+        },
+        {
+          "answers": {
+            "answerText": "No",
+            "section": "52.219-2.a"
+          },
+          "id": "FAR 52.219-2"
+        },
+        {
+          "answers": [
+            {
+              "answerText": "TIN ON FILE",
+              "section": "52.204-3.d"
+            },
+            {
+              "answerText": "Corporate Entity (Not Tax Exempt)",
+              "section": "52.204-3.e"
+            },
+            {
+              "answerText": "No",
+              "section": "52.204-3.f"
+            }
+          ],
+          "id": "FAR 52.204-3"
+        },
+        {
+          "answers": {
+            "section": "52.204.5.b"
+          },
+          "id": "FAR 52.204-5"
+        },
+        {
+          "answers": {
+            "answerText": "No",
+            "section": "52.223-22.a"
+          },
+          "id": "FAR 52.223-22"
+        },
+        {
+          "answers": [
+            {
+              "section": "52.212-3.c",
+              "naics": [
+                {
+                  "naicsName": "Other Technical and Trade Schools",
+                  "isPrimary": false,
+                  "ExcpCounter": 1,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 611519
+                },
+                {
+                  "naicsName": "Other Technical and Trade Schools",
+                  "isPrimary": true,
+                  "ExcpCounter": 1,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 611519
+                },
+                {
+                  "naicsName": "Job Corps Centers",
+                  "isPrimary": false,
+                  "ExcpCounter": 2,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 611519
+                },
+                {
+                  "naicsName": "Job Corps Centers",
+                  "isPrimary": true,
+                  "ExcpCounter": 2,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 611519
+                },
+                {
+                  "naicsName": "Research and Development in the Physical, Engineering, and Life Sciences (except Nanotechnology and Biotechnology)",
+                  "isPrimary": false,
+                  "ExcpCounter": 1,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541715
+                },
+                {
+                  "naicsName": "Research and Development in the Physical, Engineering, and Life Sciences (except Nanotechnology and Biotechnology)",
+                  "isPrimary": true,
+                  "ExcpCounter": 1,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541715
+                },
+                {
+                  "naicsName": "Aircraft, Aircraft Engine and Engine Parts",
+                  "isPrimary": false,
+                  "ExcpCounter": 2,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541715
+                },
+                {
+                  "naicsName": "Aircraft, Aircraft Engine and Engine Parts",
+                  "isPrimary": true,
+                  "ExcpCounter": 2,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541715
+                },
+                {
+                  "naicsName": "Other Aircraft Parts and Auxiliary Equipment",
+                  "isPrimary": false,
+                  "ExcpCounter": 3,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541715
+                },
+                {
+                  "naicsName": "Other Aircraft Parts and Auxiliary Equipment",
+                  "isPrimary": true,
+                  "ExcpCounter": 3,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541715
+                },
+                {
+                  "naicsName": "Guided Missiles and Space Vehicles, Their Propulsion Units and Propulsion Parts",
+                  "isPrimary": false,
+                  "ExcpCounter": 4,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541715
+                },
+                {
+                  "naicsName": "Guided Missiles and Space Vehicles, Their Propulsion Units and Propulsion Parts",
+                  "isPrimary": true,
+                  "ExcpCounter": 4,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541715
+                },
+                {
+                  "naicsName": "Other Computer Related Services",
+                  "isPrimary": false,
+                  "ExcpCounter": 1,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541519
+                },
+                {
+                  "naicsName": "Other Computer Related Services",
+                  "isPrimary": true,
+                  "ExcpCounter": 1,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541519
+                },
+                {
+                  "naicsName": "Information Technology Value Added Resellers",
+                  "isPrimary": false,
+                  "ExcpCounter": 2,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541519
+                },
+                {
+                  "naicsName": "Information Technology Value Added Resellers",
+                  "isPrimary": true,
+                  "ExcpCounter": 2,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541519
+                },
+                {
+                  "naicsName": "Engineering Services",
+                  "isPrimary": false,
+                  "ExcpCounter": 1,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541330
+                },
+                {
+                  "naicsName": "Engineering Services",
+                  "isPrimary": true,
+                  "ExcpCounter": 1,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541330
+                },
+                {
+                  "naicsName": "Military and Aerospace Equipment and Military Weapons",
+                  "isPrimary": false,
+                  "ExcpCounter": 2,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541330
+                },
+                {
+                  "naicsName": "Military and Aerospace Equipment and Military Weapons",
+                  "isPrimary": true,
+                  "ExcpCounter": 2,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541330
+                },
+                {
+                  "naicsName": "Contracts and Subcontracts for Engineering Services Awarded Under the National Energy Policy Act of 1992",
+                  "isPrimary": false,
+                  "ExcpCounter": 3,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541330
+                },
+                {
+                  "naicsName": "Contracts and Subcontracts for Engineering Services Awarded Under the National Energy Policy Act of 1992",
+                  "isPrimary": true,
+                  "ExcpCounter": 3,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541330
+                },
+                {
+                  "naicsName": "Marine Engineering and Naval Architecture",
+                  "isPrimary": false,
+                  "ExcpCounter": 4,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541330
+                },
+                {
+                  "naicsName": "Marine Engineering and Naval Architecture",
+                  "isPrimary": true,
+                  "ExcpCounter": 4,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541330
+                },
+                {
+                  "naicsName": "Ship Building and Repairing",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 336611
+                },
+                {
+                  "naicsName": "Computer and Computer Peripheral Equipment and Software Merchant Wholesalers",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 423430
+                },
+                {
+                  "naicsName": "All Other Information Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 519190
+                },
+                {
+                  "naicsName": "Other Activities Related to Real Estate",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 531390
+                },
+                {
+                  "naicsName": "Custom Computer Programming Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541511
+                },
+                {
+                  "naicsName": "Computer Systems Design Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541512
+                },
+                {
+                  "naicsName": "Computer Facilities Management Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541513
+                },
+                {
+                  "naicsName": "Administrative Management and General Management Consulting Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541611
+                },
+                {
+                  "naicsName": "Marketing Consulting Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541613
+                },
+                {
+                  "naicsName": "Process, Physical Distribution, and Logistics Consulting Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541614
+                },
+                {
+                  "naicsName": "Other Management Consulting Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541618
+                },
+                {
+                  "naicsName": "Other Scientific and Technical Consulting Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541690
+                },
+                {
+                  "naicsName": "Translation and Interpretation Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541930
+                },
+                {
+                  "naicsName": "All Other Professional, Scientific, and Technical Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541990
+                },
+                {
+                  "naicsName": "Office Administrative Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 561110
+                },
+                {
+                  "naicsName": "Facilities Support Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 561210
+                },
+                {
+                  "naicsName": "Temporary Help Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 561320
+                },
+                {
+                  "naicsName": "All Other Business Support Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 561499
+                },
+                {
+                  "naicsName": "All Other Support Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 561990
+                },
+                {
+                  "naicsName": "Computer Training",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 611420
+                },
+                {
+                  "naicsName": "Professional and Management Development Training",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 611430
+                },
+                {
+                  "naicsName": "All Other Miscellaneous Schools and Instruction",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 611699
+                },
+                {
+                  "naicsName": "Educational Support Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 611710
+                },
+                {
+                  "naicsName": "Police Protection",
+                  "isPrimary": false,
+                  "naicsCode": 922120
+                },
+                {
+                  "naicsName": "Other Justice, Public Order, and Safety Activities",
+                  "isPrimary": false,
+                  "naicsCode": 922190
+                }
+              ]
+            },
+            {
+              "answerText": "Yes",
+              "section": "52.212-3.c.1"
+            },
+            {
+              "answerText": "Yes",
+              "section": "52.212-3.c.4"
+            },
+            {
+              "answerText": "No",
+              "section": "52.212-3.q.2.i"
+            },
+            {
+              "answerText": "No",
+              "section": "52.212-3.q.2.ii"
+            },
+            {
+              "answerText": "Yes",
+              "section": "52.212-3.c.5"
+            },
+            {
+              "answerText": "Yes",
+              "section": "52.212-3.c.6.i"
+            },
+            {
+              "answerText": "No",
+              "section": "52.212-3.c.6.ii"
+            },
+            {
+              "answerText": "Yes",
+              "section": "52.212-3.c.7.i"
+            },
+            {
+              "answerText": "No",
+              "section": "52.212-3.c.7.ii"
+            },
+            {
+              "answerText": "No",
+              "section": "52.212-3.c.8"
+            },
+            {
+              "answerText": "No",
+              "section": "52.212-3.c.10.i.A"
+            },
+            {
+              "answerText": "No",
+              "section": "52.212-3.c.10.i.B"
+            },
+            {
+              "answerText": "No",
+              "section": "52.212-3.c.11.ii"
+            },
+            {
+              "answerText": "No",
+              "section": "52.212-3.d.1.i"
+            },
+            {
+              "answerText": "Yes",
+              "section": "52.212-3.d.1.ii"
+            },
+            {
+              "answerText": "Greystones Consulting Group, LLC  has not had previous contracts subject to written affirmative action programs requirements from Secretary of Labor regulations.",
+              "section": "52.212-3.d.2.i"
+            },
+            {
+              "answerText": "No",
+              "section": "52.212-3.f"
+            },
+            {
+              "answerText": "No",
+              "section": "52.212-3.h.1"
+            },
+            {
+              "answerText": "No",
+              "section": "52.212-3.h.2"
+            },
+            {
+              "answerText": "No",
+              "section": "52.212-3.h.4"
+            },
+            {
+              "answerText": "No",
+              "section": "52.212-3.h.3"
+            },
+            {
+              "answerText": "No",
+              "section": "52.212-3.h.5"
+            },
+            {
+              "answerText": "No",
+              "section": "52.212-3.i.2.i"
+            },
+            {
+              "section": "52.212-3.j"
+            },
+            {
+              "answerText": "No",
+              "section": "52.212-3.k.1.2.i"
+            },
+            {
+              "answerText": "No",
+              "section": "52.212-3.k.2.2"
+            },
+            {
+              "answerText": "Corporate Entity (Not Tax Exempt)",
+              "section": "52.212-3.l.4"
+            },
+            {
+              "answerText": "No",
+              "section": "52.212-3.l.5"
+            },
+            {
+              "answerText": "No",
+              "section": "52.212-3.n.2.i"
+            },
+            {
+              "answerText": "No",
+              "section": "52.212-3.n.2.ii"
+            },
+            {
+              "answerText": "No",
+              "section": "52.212-3.p.1"
+            },
+            {
+              "answerText": "No",
+              "section": "52.212-3.r.1"
+            },
+            {
+              "answerText": "No",
+              "section": "52.226-2.b.1"
+            },
+            {
+              "answerText": "No",
+              "section": "52.226-2.b.2"
+            }
+          ],
+          "id": "FAR 52.212-3"
+        },
+        {
+          "answers": [
+            {
+              "section": "52.219-1.b",
+              "naics": [
+                {
+                  "naicsName": "Other Technical and Trade Schools",
+                  "isPrimary": false,
+                  "ExcpCounter": 1,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 611519
+                },
+                {
+                  "naicsName": "Other Technical and Trade Schools",
+                  "isPrimary": true,
+                  "ExcpCounter": 1,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 611519
+                },
+                {
+                  "naicsName": "Job Corps Centers",
+                  "isPrimary": false,
+                  "ExcpCounter": 2,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 611519
+                },
+                {
+                  "naicsName": "Job Corps Centers",
+                  "isPrimary": true,
+                  "ExcpCounter": 2,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 611519
+                },
+                {
+                  "naicsName": "Research and Development in the Physical, Engineering, and Life Sciences (except Nanotechnology and Biotechnology)",
+                  "isPrimary": false,
+                  "ExcpCounter": 1,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541715
+                },
+                {
+                  "naicsName": "Research and Development in the Physical, Engineering, and Life Sciences (except Nanotechnology and Biotechnology)",
+                  "isPrimary": true,
+                  "ExcpCounter": 1,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541715
+                },
+                {
+                  "naicsName": "Aircraft, Aircraft Engine and Engine Parts",
+                  "isPrimary": false,
+                  "ExcpCounter": 2,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541715
+                },
+                {
+                  "naicsName": "Aircraft, Aircraft Engine and Engine Parts",
+                  "isPrimary": true,
+                  "ExcpCounter": 2,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541715
+                },
+                {
+                  "naicsName": "Other Aircraft Parts and Auxiliary Equipment",
+                  "isPrimary": false,
+                  "ExcpCounter": 3,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541715
+                },
+                {
+                  "naicsName": "Other Aircraft Parts and Auxiliary Equipment",
+                  "isPrimary": true,
+                  "ExcpCounter": 3,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541715
+                },
+                {
+                  "naicsName": "Guided Missiles and Space Vehicles, Their Propulsion Units and Propulsion Parts",
+                  "isPrimary": false,
+                  "ExcpCounter": 4,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541715
+                },
+                {
+                  "naicsName": "Guided Missiles and Space Vehicles, Their Propulsion Units and Propulsion Parts",
+                  "isPrimary": true,
+                  "ExcpCounter": 4,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541715
+                },
+                {
+                  "naicsName": "Other Computer Related Services",
+                  "isPrimary": false,
+                  "ExcpCounter": 1,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541519
+                },
+                {
+                  "naicsName": "Other Computer Related Services",
+                  "isPrimary": true,
+                  "ExcpCounter": 1,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541519
+                },
+                {
+                  "naicsName": "Information Technology Value Added Resellers",
+                  "isPrimary": false,
+                  "ExcpCounter": 2,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541519
+                },
+                {
+                  "naicsName": "Information Technology Value Added Resellers",
+                  "isPrimary": true,
+                  "ExcpCounter": 2,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541519
+                },
+                {
+                  "naicsName": "Engineering Services",
+                  "isPrimary": false,
+                  "ExcpCounter": 1,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541330
+                },
+                {
+                  "naicsName": "Engineering Services",
+                  "isPrimary": true,
+                  "ExcpCounter": 1,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541330
+                },
+                {
+                  "naicsName": "Military and Aerospace Equipment and Military Weapons",
+                  "isPrimary": false,
+                  "ExcpCounter": 2,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541330
+                },
+                {
+                  "naicsName": "Military and Aerospace Equipment and Military Weapons",
+                  "isPrimary": true,
+                  "ExcpCounter": 2,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541330
+                },
+                {
+                  "naicsName": "Contracts and Subcontracts for Engineering Services Awarded Under the National Energy Policy Act of 1992",
+                  "isPrimary": false,
+                  "ExcpCounter": 3,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541330
+                },
+                {
+                  "naicsName": "Contracts and Subcontracts for Engineering Services Awarded Under the National Energy Policy Act of 1992",
+                  "isPrimary": true,
+                  "ExcpCounter": 3,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541330
+                },
+                {
+                  "naicsName": "Marine Engineering and Naval Architecture",
+                  "isPrimary": false,
+                  "ExcpCounter": 4,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541330
+                },
+                {
+                  "naicsName": "Marine Engineering and Naval Architecture",
+                  "isPrimary": true,
+                  "ExcpCounter": 4,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541330
+                },
+                {
+                  "naicsName": "Ship Building and Repairing",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 336611
+                },
+                {
+                  "naicsName": "Computer and Computer Peripheral Equipment and Software Merchant Wholesalers",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 423430
+                },
+                {
+                  "naicsName": "All Other Information Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 519190
+                },
+                {
+                  "naicsName": "Other Activities Related to Real Estate",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 531390
+                },
+                {
+                  "naicsName": "Custom Computer Programming Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541511
+                },
+                {
+                  "naicsName": "Computer Systems Design Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541512
+                },
+                {
+                  "naicsName": "Computer Facilities Management Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541513
+                },
+                {
+                  "naicsName": "Administrative Management and General Management Consulting Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541611
+                },
+                {
+                  "naicsName": "Marketing Consulting Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541613
+                },
+                {
+                  "naicsName": "Process, Physical Distribution, and Logistics Consulting Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541614
+                },
+                {
+                  "naicsName": "Other Management Consulting Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541618
+                },
+                {
+                  "naicsName": "Other Scientific and Technical Consulting Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541690
+                },
+                {
+                  "naicsName": "Translation and Interpretation Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541930
+                },
+                {
+                  "naicsName": "All Other Professional, Scientific, and Technical Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 541990
+                },
+                {
+                  "naicsName": "Office Administrative Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 561110
+                },
+                {
+                  "naicsName": "Facilities Support Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 561210
+                },
+                {
+                  "naicsName": "Temporary Help Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 561320
+                },
+                {
+                  "naicsName": "All Other Business Support Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 561499
+                },
+                {
+                  "naicsName": "All Other Support Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 561990
+                },
+                {
+                  "naicsName": "Computer Training",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 611420
+                },
+                {
+                  "naicsName": "Professional and Management Development Training",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 611430
+                },
+                {
+                  "naicsName": "All Other Miscellaneous Schools and Instruction",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 611699
+                },
+                {
+                  "naicsName": "Educational Support Services",
+                  "isPrimary": false,
+                  "isSmallBusiness": "Y",
+                  "naicsCode": 611710
+                },
+                {
+                  "naicsName": "Police Protection",
+                  "isPrimary": false,
+                  "naicsCode": 922120
+                },
+                {
+                  "naicsName": "Other Justice, Public Order, and Safety Activities",
+                  "isPrimary": false,
+                  "naicsCode": 922190
+                }
+              ]
+            },
+            {
+              "answerText": "Yes",
+              "section": "52.219-1.b.1"
+            },
+            {
+              "answerText": "Yes",
+              "section": "52.219-1.b.3.1"
+            },
+            {
+              "answerText": "Yes",
+              "section": "52.219-1.b.4.i"
+            },
+            {
+              "answerText": "No",
+              "section": "52.219-1.b.4.ii"
+            },
+            {
+              "answerText": "Yes",
+              "section": "52.219-1.b.5.i"
+            },
+            {
+              "answerText": "No",
+              "section": "52.219-1.b.5.ii"
+            },
+            {
+              "answerText": "No",
+              "section": "52.219-1.b.6"
+            },
+            {
+              "answerText": "No",
+              "section": "52.219-1.b.7"
+            },
+            {
+              "answerText": "No",
+              "section": "52.219-1.b.8.i"
+            },
+            {
+              "answerText": "No",
+              "section": "52.219-1.b.8.ii"
+            }
+          ],
+          "id": "FAR 52.219-1"
+        },
+        {
+          "answers": {
+            "answerText": "No",
+            "section": "52.227-15.b.2"
+          },
+          "id": "FAR 52.227-15"
+        },
+        {
+          "answers": {
+            "answerText": "No",
+            "section": "52.204-17.b"
+          },
+          "id": "FAR 52.204-17"
+        },
+        {
+          "answers": {
+            "answerText": "No",
+            "section": "FAR 52.204-20.b"
+          },
+          "id": "FAR 52.204-20"
+        },
+        {
+          "answers": {
+            "answerText": "No",
+            "section": "52.222-18.c.1"
+          },
+          "id": "FAR 52.222-18"
+        },
+        {
+          "answers": [
+            {
+              "answerText": "No",
+              "section": "52.222-22.a"
+            },
+            {
+              "answerText": "Yes",
+              "section": "52.222-22.b"
+            }
+          ],
+          "id": "FAR 52.222-22"
+        },
+        {
+          "answers": {
+            "answerText": "Greystones Consulting Group, LLC  has not had previous contracts subject to written affirmative action programs requirements from Secretary of Labor regulations.",
+            "section": "52.222-25"
+          },
+          "id": "FAR 52.222-25"
+        },
+        {
+          "answers": [
+            {
+              "answerText": "No",
+              "section": "52.209-11.b.1"
+            },
+            {
+              "answerText": "No",
+              "section": "52.209-11.b.2"
+            }
+          ],
+          "id": "FAR 52.209-11"
+        },
+        {
+          "answers": {
+            "answerText": "No",
+            "section": "52.225-2.a"
+          },
+          "id": "FAR 52.225-2"
+        },
+        {
+          "answers": {
+            "answerText": "No",
+            "section": "52.225-4.a"
+          },
+          "id": "FAR 52.225-4"
+        },
+        {
+          "answers": {
+            "answerText": "No",
+            "section": "52.225-6.a"
+          },
+          "id": "FAR 52.225-6"
+        },
+        {
+          "answers": {
+            "answerText": "No",
+            "section": "52.222-48.a.1"
+          },
+          "id": "FAR 52.222-48"
+        },
+        {
+          "answers": {
+            "answerText": "No",
+            "section": "52.222-52.a.1.1"
+          },
+          "id": "FAR 52.222-52"
+        },
+        {
+          "answers": {
+            "answerText": "No",
+            "section": "SF330.1"
+          },
+          "id": "SF330"
+        }
+      ],
+      "dfarResponses": [
+        {
+          "answers": {
+            "answerText": "No",
+            "section": "252.225-7022.b"
+          },
+          "id": "DFAR 252.225-7022"
+        },
+        {
+          "answers": {
+            "answerText": "No",
+            "section": "DFAR 252.216-7008.a"
+          },
+          "id": "DFAR 252.216-7008"
+        },
+        {
+          "answers": {
+            "answerText": "No",
+            "section": "DFAR 252.209-7002.1"
+          },
+          "id": "DFAR 252.209-7002"
+        },
+        {
+          "answers": {
+            "answerText": "No",
+            "section": "252.225-7000.c.1"
+          },
+          "id": "DFAR 252.225-7000"
+        },
+        {
+          "answers": {
+            "answerText": "No",
+            "section": "252.225-7020.c.1"
+          },
+          "id": "DFAR 252.225-7020"
+        },
+        {
+          "answers": {
+            "answerText": "No",
+            "section": "252.225-7022.c.1"
+          },
+          "id": "DFAR 252.225-7022"
+        },
+        {
+          "answers": {
+            "answerText": "No",
+            "section": "252.225-7035.c.1"
+          },
+          "id": "DFAR 252.225-7035"
+        },
+        {
+          "answers": [
+            {
+              "answerText": "No",
+              "section": "252.225-7049.c.1"
+            },
+            {
+              "answerText": "No",
+              "section": "252.225-7049.c.2"
+            },
+            {
+              "answerText": "No",
+              "section": "252.225-7049.c.3"
+            },
+            {
+              "answerText": "No",
+              "section": "252.225-7049.c.4"
+            }
+          ],
+          "id": "DFAR 252.225-7049"
+        }
+      ]
+    },
+    "corporateStructureName": "Corporate Entity (Not Tax Exempt)",
+    "statusMessage": "Active",
+    "stateOfIncorporation": "DC",
+    "doingBusinessAsName": "Greystones Group",
+    "mailingAddress": {
+      "zip": "20003",
+      "city": "Washington",
+      "countryCode": "USA",
+      "stateorProvince": "DC",
+      "line1": "1201 M St SE Ste 120",
+      "zipPlus4": "3711"
+    },
+    "hasKnownExclusion": false,
+    "legalBusinessName": "Greystones Consulting Group, LLC",
+    "duns": "164563582",
+    "activationDate": "2019-05-31 16:00:24.92487",
+    "naics": [
+      {
+        "naicsName": "Police Protection",
+        "isPrimary": false,
+        "naicsCode": "922120"
+      },
+      {
+        "naicsName": "Office Administrative Services",
+        "isPrimary": false,
+        "naicsCode": "561110"
+      },
+      {
+        "naicsName": "Other Justice, Public Order, and Safety Activities",
+        "isPrimary": false,
+        "naicsCode": "922190"
+      },
+      {
+        "naicsName": "Engineering Services",
+        "isPrimary": true,
+        "naicsCode": "541330"
+      },
+      {
+        "naicsName": "Other Computer Related Services",
+        "isPrimary": false,
+        "naicsCode": "541519"
+      },
+      {
+        "naicsName": "Computer Systems Design Services",
+        "isPrimary": false,
+        "naicsCode": "541512"
+      },
+      {
+        "naicsName": "Other Technical and Trade Schools",
+        "isPrimary": false,
+        "naicsCode": "611519"
+      },
+      {
+        "naicsName": "All Other Business Support Services",
+        "isPrimary": false,
+        "naicsCode": "561499"
+      },
+      {
+        "naicsName": "Research and Development in the Physical, Engineering, and Life Sciences (except Nanotechnology and Biotechnology)",
+        "isPrimary": false,
+        "naicsCode": "541715"
+      },
+      {
+        "naicsName": "All Other Professional, Scientific, and Technical Services",
+        "isPrimary": false,
+        "naicsCode": "541990"
+      },
+      {
+        "naicsName": "Translation and Interpretation Services",
+        "isPrimary": false,
+        "naicsCode": "541930"
+      },
+      {
+        "naicsName": "Ship Building and Repairing",
+        "isPrimary": false,
+        "naicsCode": "336611"
+      },
+      {
+        "naicsName": "Computer and Computer Peripheral Equipment and Software Merchant Wholesalers",
+        "isPrimary": false,
+        "naicsCode": "423430"
+      },
+      {
+        "naicsName": "Computer Training",
+        "isPrimary": false,
+        "naicsCode": "611420"
+      },
+      {
+        "naicsName": "All Other Support Services",
+        "isPrimary": false,
+        "naicsCode": "561990"
+      },
+      {
+        "naicsName": "Educational Support Services",
+        "isPrimary": false,
+        "naicsCode": "611710"
+      },
+      {
+        "naicsName": "Professional and Management Development Training",
+        "isPrimary": false,
+        "naicsCode": "611430"
+      },
+      {
+        "naicsName": "Facilities Support Services",
+        "isPrimary": false,
+        "naicsCode": "561210"
+      },
+      {
+        "naicsName": "Administrative Management and General Management Consulting Services",
+        "isPrimary": false,
+        "naicsCode": "541611"
+      },
+      {
+        "naicsName": "Custom Computer Programming Services",
+        "isPrimary": false,
+        "naicsCode": "541511"
+      },
+      {
+        "naicsName": "Process, Physical Distribution, and Logistics Consulting Services",
+        "isPrimary": false,
+        "naicsCode": "541614"
+      },
+      {
+        "naicsName": "Other Activities Related to Real Estate",
+        "isPrimary": false,
+        "naicsCode": "531390"
+      },
+      {
+        "naicsName": "All Other Information Services",
+        "isPrimary": false,
+        "naicsCode": "519190"
+      },
+      {
+        "naicsName": "Computer Facilities Management Services",
+        "isPrimary": false,
+        "naicsCode": "541513"
+      },
+      {
+        "naicsName": "Other Management Consulting Services",
+        "isPrimary": false,
+        "naicsCode": "541618"
+      },
+      {
+        "naicsName": "Temporary Help Services",
+        "isPrimary": false,
+        "naicsCode": "561320"
+      },
+      {
+        "naicsName": "Marketing Consulting Services",
+        "isPrimary": false,
+        "naicsCode": "541613"
+      },
+      {
+        "naicsName": "All Other Miscellaneous Schools and Instruction",
+        "isPrimary": false,
+        "naicsCode": "611699"
+      },
+      {
+        "naicsName": "Other Scientific and Technical Consulting Services",
+        "isPrimary": false,
+        "naicsCode": "541690"
+      }
+    ],
+    "status": "ACTIVE"
+  }
+}

@@ -1,0 +1,774 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="updatePreNegTemplate" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:p="http://schemas.uipath.com/workflow/activities/word" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_data" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="in_config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="out_errorTable" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="in_SAMExpirationDate" Type="InArgument(x:String)" />
+    <x:Property Name="in_preNegFile" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>654,696</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>updatePreNegTemplate_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="24">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.Globalization</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="26">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.CV</AssemblyReference>
+      <AssemblyReference>UiPath.Word</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Flowchart DisplayName="updatePreNegTemplate" sap:VirtualizedContainerService.HintSize="634,636" sap2010:WorkflowViewState.IdRef="Flowchart_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <av:Point x:Key="ShapeLocation">270,2.5</av:Point>
+        <av:Size x:Key="ShapeSize">60,75</av:Size>
+        <av:PointCollection x:Key="ConnectorLocation">300,77.5 300,127.5</av:PointCollection>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Flowchart.StartNode>
+      <x:Reference>__ReferenceID0</x:Reference>
+    </Flowchart.StartNode>
+    <FlowStep x:Name="__ReferenceID0" sap2010:WorkflowViewState.IdRef="FlowStep_1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <av:Point x:Key="ShapeLocation">200,127.5</av:Point>
+          <av:Size x:Key="ShapeSize">200,66</av:Size>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <Sequence DisplayName="Replace the placeholders in the Pre-Negotiation Memorandum template with the values extracted from the XML file and the SAM.gov website" sap:VirtualizedContainerService.HintSize="1318,12603" sap2010:WorkflowViewState.IdRef="Sequence_15">
+        <Sequence.Variables>
+          <Variable x:TypeArguments="x:Boolean" Name="outputDirExsits" />
+          <Variable x:TypeArguments="x:String" Name="preNegMemorandumFilename" />
+          <Variable x:TypeArguments="ui:GenericValue" Name="currentDirectory" />
+          <Variable x:TypeArguments="ui:GenericValue" Name="businessSize" />
+        </Sequence.Variables>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <Delay sap2010:Annotation.AnnotationText="This annotation is put in to make sure the template has completed the copy process before trying to open it.&#xA;&#xA;This was done becasue this is being done on a share drive." Duration="00:00:30" sap:VirtualizedContainerService.HintSize="1276,139" sap2010:WorkflowViewState.IdRef="Delay_1">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Delay>
+        <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace Text" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="1276,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_1" Replace="[in_data(&quot;solicitNumber&quot;).ToString()]" Search="%[solicitation_number]" />
+        <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace Text" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="1276,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_38" Replace="[in_data(&quot;offerNum&quot;).ToString()]" Search="%[offer_number]" />
+        <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace Text" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="1276,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_2" Replace="[Date.Parse(in_data(&quot;offerDate&quot;).ToString()).ToString(&quot;MMMM dd, yyyy&quot;)]" Search="%[offer_date]" />
+        <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace Text" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="1276,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_3" Replace="[in_data(&quot;refreshNumber&quot;).ToString()]" Search="%[refresh_number]" />
+        <Sequence DisplayName="replace business info" sap:VirtualizedContainerService.HintSize="1276,2977" sap2010:WorkflowViewState.IdRef="Sequence_39">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace Text" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="1234,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_4" Replace="[in_data(&quot;companyName&quot;).ToString()]" Search="%[company_name]" />
+          <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace Text" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="1234,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_5" Replace="[in_data(&quot;companyStreet&quot;).ToString()]" Search="%[business_street]" />
+          <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace Text" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="1234,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_6" Replace="[in_data(&quot;companyCity&quot;).ToString()]" Search="%[business_city]" />
+          <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace Text" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="1234,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_7" Replace="[in_data(&quot;companyState&quot;).ToString()]" Search="%[business_state]" />
+          <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace Text" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="1234,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_8" Replace="[in_data(&quot;companySuite&quot;).ToString()]" Search="%[business_Suite]" />
+          <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace Text" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="1234,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_9" Replace="[in_data(&quot;companyZipCode&quot;).ToString()]" Search="%[business_zipcode]" />
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1234,91" sap2010:WorkflowViewState.IdRef="LogMessage_29" Level="Info" Message="[&quot;company phone: &quot;+in_data(&quot;companyPhone&quot;).ToString]" />
+          <TryCatch DisplayName="Try catch -business phone" sap:VirtualizedContainerService.HintSize="1234,319" sap2010:WorkflowViewState.IdRef="TryCatch_7">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <TryCatch.Try>
+              <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace Text" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="434,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_10" Replace="[in_data(&quot;companyPhone&quot;).ToString()]" Search="%[business_phone]" />
+            </TryCatch.Try>
+            <TryCatch.Catches>
+              <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="438,21" sap2010:WorkflowViewState.IdRef="Catch`1_7">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ActivityAction x:TypeArguments="s:Exception">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                  </ActivityAction.Argument>
+                  <ui:Comment sap:VirtualizedContainerService.HintSize="334,132" sap2010:WorkflowViewState.IdRef="Comment_14" Text="The phone number is not currentley available, so this is a stop gap until it is added.&#xA;&#xA;This will be a no-op if it is not in the dictionary for look-up" />
+                </ActivityAction>
+              </Catch>
+            </TryCatch.Catches>
+          </TryCatch>
+          <TryCatch DisplayName="Try catch - business fax" sap:VirtualizedContainerService.HintSize="1234,319" sap2010:WorkflowViewState.IdRef="TryCatch_8">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <TryCatch.Try>
+              <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace Text" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="434,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_11" Replace="[in_data(&quot;companyFax&quot;).ToString()]" Search="%[business_fax]" />
+            </TryCatch.Try>
+            <TryCatch.Catches>
+              <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="438,21" sap2010:WorkflowViewState.IdRef="Catch`1_8">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ActivityAction x:TypeArguments="s:Exception">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                  </ActivityAction.Argument>
+                  <ui:Comment sap:VirtualizedContainerService.HintSize="334,132" sap2010:WorkflowViewState.IdRef="Comment_15" Text="The fax number is not currentley available, so this is a stop gap until it is added.&#xA;&#xA;This will be a no-op if it is not in the dictionary for look-up" />
+                </ActivityAction>
+              </Catch>
+            </TryCatch.Catches>
+          </TryCatch>
+          <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace Text" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="1234,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_12" Replace="[in_data(&quot;dunsNumber&quot;).ToString()]" Search="%[duns_number]" />
+          <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace Text" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="1234,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_13" Replace="[in_data(&quot;tin&quot;).ToString()]" Search="%[tin]" />
+          <TryCatch DisplayName="Check business size" sap:VirtualizedContainerService.HintSize="1234,287" sap2010:WorkflowViewState.IdRef="TryCatch_9">
+            <TryCatch.Try>
+              <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_28">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="ui:GenericValue">[businessSize]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="ui:GenericValue">[in_data("businessType").ToString()]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </TryCatch.Try>
+            <TryCatch.Catches>
+              <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_9">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ActivityAction x:TypeArguments="s:Exception">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                  </ActivityAction.Argument>
+                  <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_29">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="ui:GenericValue">[businessSize]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="ui:GenericValue">[NOTHING]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </ActivityAction>
+              </Catch>
+            </TryCatch.Catches>
+          </TryCatch>
+          <If Condition="[String.IsNullOrEmpty(businessSize)]" DisplayName="check business size" sap:VirtualizedContainerService.HintSize="1234,388" sap2010:WorkflowViewState.IdRef="If_25">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <If.Then>
+              <Sequence sap:VirtualizedContainerService.HintSize="376,209" sap2010:WorkflowViewState.IdRef="Sequence_38">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:Comment sap:VirtualizedContainerService.HintSize="334,55" sap2010:WorkflowViewState.IdRef="Comment_16" Text="// Add to review list for this document" />
+                <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{in_data(&quot;companyName&quot;).ToString(), in_Data(&quot;dunsNumber&quot;).ToString(), &quot; &quot;,&quot;Business Size&quot;}]" DataTable="[out_errorTable]" DisplayName="Add business size Error" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="AddDataRow_4" />
+              </Sequence>
+            </If.Then>
+            <If.Else>
+              <If Condition="[businessSize.Length &gt;= 250]" DisplayName="check sin title string length" sap:VirtualizedContainerService.HintSize="813,240" sap2010:WorkflowViewState.IdRef="If_24">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <If.Then>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke workflow file" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_16" UnSafe="False" WorkflowFileName="TextReplaceLarge.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="PatternToReplace">%[business_type]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="ReplacementText">[businessSize]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="WordDocumentPath">[in_preNegFile]</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                </If.Then>
+                <If.Else>
+                  <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace Text" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="434,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_14" Replace="[businessSize]" Search="%[business_type]" />
+                </If.Else>
+              </If>
+            </If.Else>
+          </If>
+          <TryCatch sap2010:Annotation.AnnotationText="This is to amke sure the parent company was added to the dictionary, if not ignore and continue." DisplayName="Try catch - Parent Co." sap:VirtualizedContainerService.HintSize="1234,225" sap2010:WorkflowViewState.IdRef="TryCatch_10">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <TryCatch.Try>
+              <Sequence sap:VirtualizedContainerService.HintSize="526,429" sap2010:WorkflowViewState.IdRef="Sequence_49">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <If Condition="[(in_data(&quot;parentCompany&quot;) IS NOTHING) OR (String.IsNullOrEmpty(in_data(&quot;parentCompany&quot;).ToString())) OR (String.IsNullOrWhiteSpace(in_data(&quot;parentCompany&quot;).ToString()))]" DisplayName="Check if there is a parent Company" sap:VirtualizedContainerService.HintSize="484,208" sap2010:WorkflowViewState.IdRef="If_27">
+                  <If.Then>
+                    <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_39">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:Object">[in_data("parentCompany")]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:Object">["N/A"]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                  </If.Then>
+                </If>
+                <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace Text" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="484,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_15" Replace="[in_data(&quot;parentCompany&quot;).ToString()]" Search="%[parent_company]" />
+              </Sequence>
+            </TryCatch.Try>
+            <TryCatch.Catches>
+              <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="400,21" sap2010:WorkflowViewState.IdRef="Catch`1_10">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ActivityAction x:TypeArguments="s:Exception">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                  </ActivityAction.Argument>
+                  <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace Text" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="434,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_40" Replace="N/A" Search="%[parent_company]" />
+                </ActivityAction>
+              </Catch>
+            </TryCatch.Catches>
+          </TryCatch>
+        </Sequence>
+        <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace Text" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="1276,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_41" Replace="[in_data(&quot;prePonderanceOfWork&quot;).ToString()]" Search="%[prePonderanceOfWork]" />
+        <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Replace NAICS" sap:VirtualizedContainerService.HintSize="1276,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_17" UnSafe="False" WorkflowFileName="TextReplaceLarge.xaml">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InArgument x:TypeArguments="x:String" x:Key="PatternToReplace">%[naics_code]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="ReplacementText">[in_data("naicsCodes").ToString()]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="WordDocumentPath">[in_preNegFile]</InArgument>
+          </ui:InvokeWorkflowFile.Arguments>
+        </ui:InvokeWorkflowFile>
+        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1276,91" sap2010:WorkflowViewState.IdRef="LogMessage_14" Level="Info" Message="[&quot;found est Sales: &quot;+(in_data(&quot;estimatedSales&quot;).ToString())]" />
+        <p:DocumentReplaceText Found="{x:Null}" sap2010:Annotation.AnnotationText="Est. value is sum of all * 5" DisplayName="Replace Est. Value" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="1276,123" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_17" Replace="[FormatNumber(CDbl(Convert.ToDouble(in_data(&quot;estimatedSales&quot;).ToString()) * 5).ToString(), 2)]" Search="%[estimated_contract_value]">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </p:DocumentReplaceText>
+        <p:DocumentReplaceText Found="{x:Null}" sap2010:Annotation.AnnotationText="estimated sales times 20 (4 x 5 years)" DisplayName="Replace Period Value" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="1276,123" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_18" Replace="[FormatNumber(CDbl(Convert.ToDouble(in_data(&quot;estimatedSales&quot;).ToString()) * 20).ToString(), 2)]" Search="%[base_period_options_value]">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </p:DocumentReplaceText>
+        <If Condition="[(CDbl(Convert.ToDouble(in_data(&quot;estimatedSales&quot;).ToString()) * 20)) &gt; 10000000]" DisplayName="EEO check" sap:VirtualizedContainerService.HintSize="1276,240" sap2010:WorkflowViewState.IdRef="If_26">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <If.Then>
+            <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace EEO" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="434,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_19" Replace="[ ] N/A  X Required" Search="%[eeo_clr]" />
+          </If.Then>
+          <If.Else>
+            <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace EEO" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="434,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_20" Replace="X N/A [ ] Required" Search="%[eeo_clr]" />
+          </If.Else>
+        </If>
+        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1276,91" sap2010:WorkflowViewState.IdRef="LogMessage_20" Level="Info" Message="[&quot;checking/replacing exclusions&quot;]" />
+        <p:DocumentReplaceText Found="{x:Null}" sap2010:Annotation.AnnotationText="This is set to yes if there is an active SAM profile (this should always be true) " DisplayName="Replace SAM" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="1276,134" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_39" Replace="X Yes [] No " Search="%[SAM_found]">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </p:DocumentReplaceText>
+        <TryCatch sap2010:Annotation.AnnotationText="This is worded a bit odd, so the logic for what to check is reversed in this area.&#xA;&#xA;TODO double check how this is being dtermined." DisplayName="were there exclusions?" sap:VirtualizedContainerService.HintSize="1276,568" sap2010:WorkflowViewState.IdRef="TryCatch_11">
+          <TryCatch.Variables>
+            <Variable x:TypeArguments="x:Object" Name="tempObj" />
+          </TryCatch.Variables>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <TryCatch.Try>
+            <Sequence sap:VirtualizedContainerService.HintSize="476,284" sap2010:WorkflowViewState.IdRef="Sequence_41">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Assign sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="Assign_30">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Object">[tempObj]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Object">[in_data("exclusionFound")]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace Exclusion" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="434,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_21" Replace="[] does X does not" Search="%[on_excluded_list]" />
+            </Sequence>
+          </TryCatch.Try>
+          <TryCatch.Catches>
+            <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="480,21" sap2010:WorkflowViewState.IdRef="Catch`1_11">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ActivityAction x:TypeArguments="s:Exception">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                </ActivityAction.Argument>
+                <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace Eclusion" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="434,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_22" Replace="X does [] does not" Search="%[on_excluded_list]" />
+              </ActivityAction>
+            </Catch>
+          </TryCatch.Catches>
+        </TryCatch>
+        <Sequence DisplayName="replace SIN info" sap:VirtualizedContainerService.HintSize="689,1829" sap2010:WorkflowViewState.IdRef="Sequence_43">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Name="sinDetails" />
+            <Variable x:TypeArguments="scg:List(scg:Dictionary(x:String, x:String))" Name="sinList" />
+          </Sequence.Variables>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:LogMessage DisplayName="Log message" sap:VirtualizedContainerService.HintSize="647,91" sap2010:WorkflowViewState.IdRef="LogMessage_15" Level="Info" Message="[&quot;starting SINS replace&quot;]" />
+          <Assign sap:VirtualizedContainerService.HintSize="647,60" sap2010:WorkflowViewState.IdRef="Assign_31">
+            <Assign.To>
+              <OutArgument x:TypeArguments="scg:List(scg:Dictionary(x:String, x:String))">[sinList]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="scg:List(scg:Dictionary(x:String, x:String))">[tryCast(in_data("sinInfo"),List(of Dictionary(of String, String)))]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <ui:ForEach x:TypeArguments="scg:Dictionary(x:String, x:String)" CurrentIndex="{x:Null}" DisplayName="For each" sap:VirtualizedContainerService.HintSize="647,1015" sap2010:WorkflowViewState.IdRef="ForEach`1_8" Values="[sinList]">
+            <ui:ForEach.Body>
+              <ActivityAction x:TypeArguments="scg:Dictionary(x:String, x:String)">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" Name="item" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="611,881" sap2010:WorkflowViewState.IdRef="Sequence_42">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="x:String" Name="sinTitle" />
+                    <Variable x:TypeArguments="x:String" Name="sinScope" />
+                    <Variable x:TypeArguments="x:String" Name="sinCoopPurchase" />
+                  </Sequence.Variables>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Assign sap:VirtualizedContainerService.HintSize="569,60" sap2010:WorkflowViewState.IdRef="Assign_32">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[sinTitle]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[item("sinTitle").ToString]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign sap:VirtualizedContainerService.HintSize="569,60" sap2010:WorkflowViewState.IdRef="Assign_33">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[sinScope]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[sinTitle+" - "+item("sinScope").ToString]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <If Condition="[(item(&quot;cooperativePurchasing&quot;) IS NOTHING) OR (String.IsNullOrEmpty(item(&quot;cooperativePurchasing&quot;).ToString)) OR (String.IsNullOrWhiteSpace(item(&quot;cooperativePurchasing&quot;).ToString))]" DisplayName="If coop purch. is YES" sap:VirtualizedContainerService.HintSize="569,208" sap2010:WorkflowViewState.IdRef="If_28">
+                    <If.Then>
+                      <Assign DisplayName="Left blank" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_40">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[sinCoopPurchase]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">[sinTitle+"- NO"]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                    </If.Then>
+                    <If.Else>
+                      <Assign DisplayName="Use input value" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_34">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[sinCoopPurchase]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">[sinTitle+"-"+item("cooperativePurchasing").ToString]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                    </If.Else>
+                  </If>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke workflow file" sap:VirtualizedContainerService.HintSize="569,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_18" UnSafe="False" WorkflowFileName="TextReplaceLarge.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="PatternToReplace">%[Sin_info]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="ReplacementText">[sinTitle+Environment.NewLine +"[Sin_info]"]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="WordDocumentPath">[in_preNegFile]</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="insert scope_of_contract" sap:VirtualizedContainerService.HintSize="569,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_19" UnSafe="False" WorkflowFileName="TextReplaceLarge.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="PatternToReplace">%[scope_of_contract]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="ReplacementText">[sinScope+Environment.NewLine +"[scope_of_contract]"]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="WordDocumentPath">[in_preNegFile]</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="insert purchase_ cooperative" sap:VirtualizedContainerService.HintSize="569,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_20" UnSafe="False" WorkflowFileName="TextReplaceLarge.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="PatternToReplace">%[purchase_cooperative]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="ReplacementText">[sinCoopPurchase+Environment.NewLine +"[purchase_cooperative]"]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="WordDocumentPath">[in_preNegFile]</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                </Sequence>
+              </ActivityAction>
+            </ui:ForEach.Body>
+          </ui:ForEach>
+          <ui:Comment sap:VirtualizedContainerService.HintSize="434,55" sap2010:WorkflowViewState.IdRef="Comment_17" Text="// remove the last replacement characters" />
+          <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace sin_info" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="434,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_23" Search="%[Sin_info]">
+            <p:DocumentReplaceText.Replace>
+              <InArgument x:TypeArguments="x:String">
+                <Literal x:TypeArguments="x:String" Value="" />
+              </InArgument>
+            </p:DocumentReplaceText.Replace>
+          </p:DocumentReplaceText>
+          <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace scope_of_contract" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="434,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_24" Search="%[scope_of_contract]">
+            <p:DocumentReplaceText.Replace>
+              <InArgument x:TypeArguments="x:String">
+                <Literal x:TypeArguments="x:String" Value="" />
+              </InArgument>
+            </p:DocumentReplaceText.Replace>
+          </p:DocumentReplaceText>
+          <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace purchase_cooperative" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="434,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_25" Search="%[purchase_cooperative]">
+            <p:DocumentReplaceText.Replace>
+              <InArgument x:TypeArguments="x:String">
+                <Literal x:TypeArguments="x:String" Value="" />
+              </InArgument>
+            </p:DocumentReplaceText.Replace>
+          </p:DocumentReplaceText>
+        </Sequence>
+        <Sequence DisplayName="replace IFF admin" sap:VirtualizedContainerService.HintSize="1276,601" sap2010:WorkflowViewState.IdRef="Sequence_45">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="scg:List(x:String)" Name="contactAdmins" />
+          </Sequence.Variables>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:LogMessage DisplayName="Log message" sap:VirtualizedContainerService.HintSize="434,91" sap2010:WorkflowViewState.IdRef="LogMessage_16" Level="Info" Message="[&quot;starting IFF replace&quot;]" />
+          <Assign DisplayName="get list of IFF" sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="Assign_35">
+            <Assign.To>
+              <OutArgument x:TypeArguments="scg:List(x:String)">[contactAdmins]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="scg:List(x:String)">[tryCast(in_data("iffAdmins"),List(of String))]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="prep IFF for replace" sap:VirtualizedContainerService.HintSize="434,51" sap2010:WorkflowViewState.IdRef="ForEach`1_9" Values="[contactAdmins]">
+            <ui:ForEach.Body>
+              <ActivityAction x:TypeArguments="x:Object">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="x:Object" Name="item" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="IFF replace" sap:VirtualizedContainerService.HintSize="376,279" sap2010:WorkflowViewState.IdRef="Sequence_44">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="x:String" Name="person" />
+                  </Sequence.Variables>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_36">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[person]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[item.ToString+ System.Environment.NewLine+"[iff_administrators]"]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke workflow file" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_21" UnSafe="False" WorkflowFileName="TextReplaceLarge.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="PatternToReplace">%[iff_administrators]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="ReplacementText">[person + System.Environment.NewLine+"[iff_administrators]"]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="WordDocumentPath">[in_preNegFile]</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                </Sequence>
+              </ActivityAction>
+            </ui:ForEach.Body>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:ForEach>
+          <ui:Comment sap:VirtualizedContainerService.HintSize="434,55" sap2010:WorkflowViewState.IdRef="Comment_18" Text="// remove the last replacement characters" />
+          <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace final IFF placeholder" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="434,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_26" Search="%[iff_administrators]">
+            <p:DocumentReplaceText.Replace>
+              <InArgument x:TypeArguments="x:String">
+                <Literal x:TypeArguments="x:String" Value="" />
+              </InArgument>
+            </p:DocumentReplaceText.Replace>
+          </p:DocumentReplaceText>
+        </Sequence>
+        <Sequence DisplayName="replace contract admin" sap:VirtualizedContainerService.HintSize="1276,732" sap2010:WorkflowViewState.IdRef="Sequence_47">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="scg:List(x:String)" Name="contactAdmins" />
+          </Sequence.Variables>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:LogMessage DisplayName="Log message" sap:VirtualizedContainerService.HintSize="434,91" sap2010:WorkflowViewState.IdRef="LogMessage_17" Level="Info" Message="[&quot;starting contact for contract replace&quot;]" />
+          <Assign sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="Assign_37">
+            <Assign.To>
+              <OutArgument x:TypeArguments="scg:List(x:String)">[contactAdmins]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="scg:List(x:String)">[tryCast(in_data("contactForContractInfo"),List(of String))]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <ui:LogMessage DisplayName="Log message" sap:VirtualizedContainerService.HintSize="434,91" sap2010:WorkflowViewState.IdRef="LogMessage_18" Level="Info" Message="[&quot;how many contact for contract? &quot;+contactAdmins.Count.ToString()]" />
+          <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="prep Admin for replace" sap:VirtualizedContainerService.HintSize="434,51" sap2010:WorkflowViewState.IdRef="ForEach`1_10" Values="[contactAdmins]">
+            <ui:ForEach.Body>
+              <ActivityAction x:TypeArguments="x:Object">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="x:Object" Name="item" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="admin replace" sap:VirtualizedContainerService.HintSize="376,279" sap2010:WorkflowViewState.IdRef="Sequence_46">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="x:String" Name="person" />
+                  </Sequence.Variables>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_38">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[person]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[item.ToString+Environment.NewLine +"[admin_contract_contact]"]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke workflow file" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_22" UnSafe="False" WorkflowFileName="TextReplaceLarge.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="PatternToReplace">%[admin_contract_contact]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="ReplacementText">[person]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="WordDocumentPath">[in_preNegFile]</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                </Sequence>
+              </ActivityAction>
+            </ui:ForEach.Body>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:ForEach>
+          <ui:Comment sap:VirtualizedContainerService.HintSize="434,55" sap2010:WorkflowViewState.IdRef="Comment_19" Text="// remove the last replacement characters" />
+          <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace Eclusion" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="434,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_27" Search="%[admin_contract_contact]">
+            <p:DocumentReplaceText.Replace>
+              <InArgument x:TypeArguments="x:String">
+                <Literal x:TypeArguments="x:String" Value="" />
+              </InArgument>
+            </p:DocumentReplaceText.Replace>
+          </p:DocumentReplaceText>
+        </Sequence>
+        <Sequence DisplayName="replace Neg." sap:VirtualizedContainerService.HintSize="476,668" sap2010:WorkflowViewState.IdRef="Sequence_48">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,91" sap2010:WorkflowViewState.IdRef="LogMessage_11" Level="Info" Message="[&quot;replacinging Negotiators&quot;]" />
+          <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="prep Negotiators for replace" sap:VirtualizedContainerService.HintSize="434,313" sap2010:WorkflowViewState.IdRef="ForEach`1_6" Values="[tryCast(in_data(&quot;negotiatorInfo&quot;),List(of String))]">
+            <ui:ForEach.Body>
+              <ActivityAction x:TypeArguments="x:Object">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="x:Object" Name="person" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="negaotiator replace" sap:VirtualizedContainerService.HintSize="376,179" sap2010:WorkflowViewState.IdRef="Sequence_28">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke workflow file" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="TextReplaceLarge.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="PatternToReplace">[negotiator_administrators], [negotiator_title], authorized to Negotiate on behalf of contractor.</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="ReplacementText">[person.ToString()+Environment.NewLine+"[negotiator_administrators], [negotiator_title], authorized to Negotiate on behalf of contractor."]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="WordDocumentPath">[in_preNegFile]</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                </Sequence>
+              </ActivityAction>
+            </ui:ForEach.Body>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:ForEach>
+          <p:DocumentReplaceText Found="{x:Null}" DisplayName="remove last instance of neg. replace string" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="434,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_28" Search="[negotiator_administrators], [negotiator_title], authorized to Negotiate on behalf of contractor.">
+            <p:DocumentReplaceText.Replace>
+              <InArgument x:TypeArguments="x:String">
+                <Literal x:TypeArguments="x:String" Value="" />
+              </InArgument>
+            </p:DocumentReplaceText.Replace>
+          </p:DocumentReplaceText>
+        </Sequence>
+        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1276,91" sap2010:WorkflowViewState.IdRef="LogMessage_21" Level="Info" Message="[&quot;replacinging sub-ciontracting&quot;]" />
+        <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace sub contracting plan" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="1276,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_29" Replace="[in_data(&quot;subContractingPlan&quot;).ToString()]" Search="%[subcontracting_plan]" />
+        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1276,91" sap2010:WorkflowViewState.IdRef="LogMessage_22" Level="Info" Message="[&quot;replacinging Disastor&quot;]" />
+        <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace disaster recovery plan" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="1276,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_30" Replace="[in_data(&quot;disasterRecovery&quot;).ToString()]" Search="%[diasasterRecovery_value]" />
+        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1276,91" sap2010:WorkflowViewState.IdRef="LogMessage_23" Level="Info" Message="[&quot;replacinging exception terms&quot;]" />
+        <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace exceptionsTerms_value" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="1276,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_31" Replace="[in_data(&quot;exceptionsToTermsAndConditions&quot;).ToString()]" Search="%[exceptionsTerms_value]" />
+        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1276,91" sap2010:WorkflowViewState.IdRef="LogMessage_24" Level="Info" Message="[&quot;replacinging sub K&quot;]" />
+        <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace sub K plan" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="1276,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_32" Replace="[in_data(&quot;subContractingPlan&quot;).ToString()]" Search="%[SubKContractingPlan]" />
+        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1276,91" sap2010:WorkflowViewState.IdRef="LogMessage_25" Level="Info" Message="[&quot;replacinging exp. date&quot;]" />
+        <If Condition="[String.IsNullOrEmpty(in_data(&quot;samExperation&quot;).ToString())]" DisplayName="check expire date" sap:VirtualizedContainerService.HintSize="1276,357" sap2010:WorkflowViewState.IdRef="If_8">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <If.Then>
+            <Sequence sap:VirtualizedContainerService.HintSize="376,209" sap2010:WorkflowViewState.IdRef="Sequence_8">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:Comment sap:VirtualizedContainerService.HintSize="334,55" sap2010:WorkflowViewState.IdRef="Comment_4" Text="// Add to review list for this document" />
+              <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{in_data(&quot;companyName&quot;).ToString(), in_data(&quot;dunsNumber&quot;).ToString(), &quot; &quot;,&quot;SAM Expiration Date&quot;}]" DataTable="[out_errorTable]" DisplayName="Add Sam date Error" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="AddDataRow_3" />
+            </Sequence>
+          </If.Then>
+          <If.Else>
+            <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace expire Date" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="434,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_33" Replace="[Date.ParseExact(in_data(&quot;samExperation&quot;).ToString(),&quot;yyyy-MM-dd&quot;,System.Globalization.CultureInfo.CurrentCulture).ToString(&quot;MMMM dd, yyyy&quot;)]" Search="%[expiration_date]" />
+          </If.Else>
+        </If>
+        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1276,91" sap2010:WorkflowViewState.IdRef="LogMessage_26" Level="Info" Message="[&quot;replacinging purchase recovery&quot;]" />
+        <If Condition="[in_data(&quot;disasterRecovery&quot;).ToString() = &quot;Yes&quot;]" DisplayName="If recovery purchase" sap:VirtualizedContainerService.HintSize="1276,240" sap2010:WorkflowViewState.IdRef="If_11">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <If.Then>
+            <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace recovery purchase" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="434,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_34" Replace="X Yes   [ ] No" Search="%[recovery_purchase]" />
+          </If.Then>
+          <If.Else>
+            <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace recovery purchase" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="434,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_35" Replace="[ ] Yes   X No" Search="%[recovery_purchase]" />
+          </If.Else>
+        </If>
+        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1276,91" sap2010:WorkflowViewState.IdRef="LogMessage_30" Level="Info" Message="[&quot;replacing RepAndCertComplete: &quot;+in_data(&quot;RepAndCertComplete&quot;).ToString()]" />
+        <If Condition="[in_data(&quot;RepAndCertComplete&quot;).ToString().ToUpper() = &quot;TRUE&quot;]" DisplayName="Is Active in SAM" sap:VirtualizedContainerService.HintSize="1276,240" sap2010:WorkflowViewState.IdRef="If_29">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <If.Then>
+            <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace recovery purchase" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="434,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_42" Replace="X Yes   [ ] No" Search="%[RepAndCertComplete]" />
+          </If.Then>
+          <If.Else>
+            <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace recovery purchase" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="434,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_43" Replace="[ ] Yes   X No" Search="%[RepAndCertComplete]" />
+          </If.Else>
+        </If>
+        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1276,91" sap2010:WorkflowViewState.IdRef="LogMessage_27" Level="Info" Message="[&quot;replacinging min order&quot;]" />
+        <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace min order" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="1276,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_36" Replace="[in_data(&quot;minimumOrderLimit&quot;).ToString()]" Search="%[minimum_limit_value]" />
+        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1276,91" sap2010:WorkflowViewState.IdRef="LogMessage_28" Level="Info" Message="[&quot;replacinging excl. date&quot;]" />
+        <p:DocumentReplaceText Found="{x:Null}" DisplayName="Replace exclusion date" FilePath="[in_preNegFile]" sap:VirtualizedContainerService.HintSize="1276,92" sap2010:WorkflowViewState.IdRef="DocumentReplaceText_37" Replace="[Now.ToString(&quot;MMMM dd, yyyy&quot;)]" Search="%[exclusion_check_date]" />
+      </Sequence>
+    </FlowStep>
+  </Flowchart>
+</Activity>
